@@ -52,3 +52,7 @@
    - git diff <cod. do commit> <cod. do commit2>
 - Descatar alterações antes de Add:
    - git checkout <file>
+
+<a href="https://www.entra21.com.br/" align="center"> 
+<img src= "https://cdn.sonicadigital.com.br/entra21/storage/header/257/original-61f8610472d4f.png"
+</a>
