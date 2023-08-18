@@ -16,9 +16,6 @@
 - Verificar as configurações:
    - git config user.name
    - git config user.email
-- Verificar as configurações:
-   - git config user.name
-   - git config user.email
 - Iniciar repositório:
    - git init 
 - Verificar status:
@@ -48,8 +45,8 @@
    - git log
    - git log --oneline --> forma mais resumida
 - Para ignorar arquivos:
-   - Crie arquivo ".gitignore"
-   - Arquivos dentro do ".gitignore" o Git ignora e não rasteria
+   - Crie o arquivo ".gitignore"
+   - Arquivos dentro do ".gitignore" o Git ignora e não rastreia
 - Verificar diferenças entre commits:
    - git diff <cod. do commit> <cod. do commit2>
 - Descatar alterações antes de Add:
