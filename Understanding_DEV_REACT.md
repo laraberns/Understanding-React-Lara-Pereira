@@ -37,3 +37,18 @@
    - git branch -M main 
 - Clonar rep. remoto:
    - git clone "http://...url do rep remoto...
+- Removendo arquivos:
+   - git rm --> remove do repositório (<mark>DELETA</mark> arquivo)
+   - git rm --cached <file> --> arquivo deixa de ser monitorado (untracked)
+- Utilizar Add junto com Commit (stage e commita):
+   - git commit -am "criando commit"
+- Verificar alterações:
+   - git log
+   - git log --oneline --> forma mais resumida
+- Para ignorar arquivos:
+   - Crie arquivo ".gitignore"
+   - Arquivos dentro do ".gitignore" o Git ignora e não rasteria
+- Verificar diferenças entre commits:
+   - git diff <cod. do commit> <cod. do commit2>
+- Descatar alterações antes de Add:
+   - git checkout <file>
