@@ -1,0 +1,39 @@
+# Git e GitHub
+- Software para controle de versionamento de código;
+- Existem dois tipos de Software de Controle de Versão (VCS): 
+   - Centralizado
+   -  Distribuído (Ex: Git)
+- Algumas das vantagens de utilizar VCS são: segurança e facilita no trabalho em equipe.
+
+## Comandos do Git
+- Verificar a versão do Git e se está instalado:
+   - git --version
+- Configurar usuário e e-mail cadastrado (para máquina toda):
+   - git config --global user.email you@example.com
+   - git config --global user.name "Your Name"  
+- Verificar as configurações:
+   - git config user.name
+   - git config user.email
+- Verificar as configurações:
+   - git config user.name
+   - git config user.email
+- Iniciar repositório:
+   - git init 
+- Verificar status:
+   - git status 
+- Adicionar arquivos na área de staged:
+   - git add nome_arquivo
+   - git add . 
+- Commitar arquivos:
+   - git commit -m "comentário"
+- Mapear repositório remoto:
+   - git remote add origin "http://...url do rep remoto..." 
+- Enviar alterações para o rep. remoto:
+   - git push -u origin master
+   - git push 
+- Atualizar rep. local de acordo com rep. remoto:
+   - git pull
+- Renomear branch:
+   - git branch -M main 
+- Clonar rep. remoto:
+   - git clone "http://...url do rep remoto...
