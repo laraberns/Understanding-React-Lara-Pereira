@@ -1,9 +1,11 @@
 # Git e GitHub
+~~~
 - Software para controle de versionamento de código;
 - Existem dois tipos de Software de Controle de Versão (VCS): 
    - Centralizado
    -  Distribuído (Ex: Git)
 - Algumas das vantagens de utilizar VCS são: segurança e facilita no trabalho em equipe.
+~~~
 
 ## Comandos do Git
 - Verificar a versão do Git e se está instalado:
@@ -53,6 +55,9 @@
 - Descatar alterações antes de Add:
    - git checkout <file>
 
-<a href="https://www.entra21.com.br/" align="center"> 
+
+<p style="text-align: center;">
+<a href="https://www.entra21.com.br/"> 
 <img src= "https://cdn.sonicadigital.com.br/entra21/storage/header/257/original-61f8610472d4f.png"
 </a>
+</p>
