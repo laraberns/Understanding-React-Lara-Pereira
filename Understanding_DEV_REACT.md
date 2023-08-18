@@ -56,8 +56,8 @@
    - git checkout <file>
 
 
-<p style="text-align: center;">
+ <p align="center">
 <a href="https://www.entra21.com.br/"> 
-<img src= "https://cdn.sonicadigital.com.br/entra21/storage/header/257/original-61f8610472d4f.png"
+<img src= "https://cdn.sonicadigital.com.br/entra21/storage/header/257/original-61f8610472d4f.png">
 </a>
 </p>
