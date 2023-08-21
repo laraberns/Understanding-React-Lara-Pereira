@@ -216,6 +216,22 @@
         </dl>
 ~~~
 
+- Imagens:
+~~~
+        <img src="../000-Exercícios/assets/States_of_Brazil.png" 
+             alt="Mapa do Brasil" title="Mapa dos estados do brasil" width="150" height="150">
+~~~
+
+- Link para outro site:
+~~~
+        <p> O <a href="https://www.entra21.com.br/" target="_blank">Entra21</a> é um programa de empregabilidade e formação profissional</p>
+~~~
+
+- Link para Bookmark:
+~~~
+         <p><a href="#titulo3">Link para o topo da página</a></p>
+~~~
+
 
 
  <p align="center">
