@@ -222,14 +222,120 @@
              alt="Mapa do Brasil" title="Mapa dos estados do brasil" width="150" height="150">
 ~~~
 
+### Links no HTML
 - Link para outro site:
 ~~~
         <p> O <a href="https://www.entra21.com.br/" target="_blank">Entra21</a> é um programa de empregabilidade e formação profissional</p>
 ~~~
 
-- Link para Bookmark:
+- Link para Bookmark da própria página:
 ~~~
          <p><a href="#titulo3">Link para o topo da página</a></p>
+~~~
+
+- Link para Bookmark de outra página:
+~~~
+         <p><a href="https://www.proway.de/#colophon" target="_blank">rodapá no site da proway</a></p>
+~~~
+
+- Link para uma página do próprio site:
+~~~
+         <p><a href="contato.html">Página de contato</a></p>
+~~~
+
+- Link em uma imagem/figura/tag:
+~~~
+        <a href="https://pt.wikipedia.org/wiki/HTML" target="_black">
+        <img src="assets/brazil-flag.png" width="150" alt="fundo js">
+    </a>
+~~~
+
+- Link para E-mail:
+~~~
+         <p>Gostou de nossa oferta? entre em <a href="mailto:ivan.borchardt.cobol@gmail.com?subject=Contato&body=estou entrando em contato referente a oferta...">contato</a></p>
+~~~
+
+- Link de Download:
+~~~
+         <p>baixe a <a href="assets/brazil-flag.png" download>bandeira do brasil</a></p>
+~~~
+
+### Estrturação com tags semânticas
+- Exemplo de arquivo HTML utilizando tags semânticas: header, main, footer, section, nav, aside...:
+~~~
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <!---------------- Area de Cabeçalho ---------------------->
+        <header>
+                <h1>titulo</h1>
+                <nav>
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Loja</a></li>
+                        <li><a href="">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <p>logo da empresa</p>
+            </div>
+        </header>
+        <!---------------- Barra Lateral Esquerda ---------------------->
+        <aside>
+            <p>aside esquerda</p>
+        </aside>
+        <!---------------- Sessao Principal ---------------------->
+        <main>
+            <section>
+                <span><p>caixa de uma unica linha</p></span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Dolore aperiam, <span>facere modi animi</span> dignissimos maiores? 
+                    Eaque enim laudantium libero illum debitis nisi ullam hic 
+                    consequatur, quisquam quam aliquam alias mollitia.</p>
+                <div>
+
+            </section>
+
+            <section>
+                <h2>Titulo</h2>
+                <article>
+                    <h3>titulo do artigo </h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum, ratione repellat praesentium
+                        explicabo reiciendis laborum! Quidem quisquam voluptatem, dolor facere, esse debitis harum quod,
+                        laboriosam tenetur reiciendis unde sunt praesentium.</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem in corrupti obcaecati
+                        voluptatibus, reprehenderit laboriosam, veritatis minima, saepe vel fuga similique? Ullam,
+                        consectetur sunt eum eligendi doloremque velit nemo rerum.</p>
+                </article>
+
+            </section>
+            <section>
+                <figure>
+                    <img src="" alt="">
+                </figure>
+            </section>
+        </main>
+        <!---------------- Bara Lateral Direita ---------------------->
+        <aside>
+            <p>aside direita</p>
+        </aside>
+        <!---------------- Sessão de Rodapé  ---------------------->
+        <footer>
+
+        </footer>
+    </div>
+</body>
+
+</html>
 ~~~
 
 
