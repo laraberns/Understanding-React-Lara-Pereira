@@ -216,10 +216,12 @@
         </dl>
 ~~~
 
-- Imagens:
+- Details e Summary:
 ~~~
-        <img src="../000-Exercícios/assets/States_of_Brazil.png" 
-             alt="Mapa do Brasil" title="Mapa dos estados do brasil" width="150" height="150">
+        <details>
+            <summary>Como posso acessar meu curso?</summary>
+            <p>vc poderá acessar seu curso atravéws do youtubo pelo link ...</p>
+        </details>
 ~~~
 
 ### Links no HTML
@@ -260,7 +262,98 @@
          <p>baixe a <a href="assets/brazil-flag.png" download>bandeira do brasil</a></p>
 ~~~
 
-### Estrturação com tags semânticas
+### Tabelas
+- Estrutura mínima de uma tabela:
+~~~
+      <table border="1">
+        <tr>
+            <th>Coluna 1</th>
+            <th>Coluna 2</th>
+            <th>Coluna 3</th>
+        </tr>
+    </table>
+~~~
+
+- Estrutura completa de uma tabela:
+~~~
+   <table border="1" cellpadding="10" width="100%" align="center">
+        <thead>
+            <tr>
+                <th>Qtd</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr align="center">
+                <td>1</td>
+                <td>Lápis</td>
+                <td>1,00</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"><b>Total</b></td>
+                <td>19,00</td>
+            </tr>
+        </tfoot>
+    </table>
+~~~
+
+- Mesclando linhas e colunas de uma tabela:
+~~~
+    <table border="1" cellspacing="0" >
+        <tr>
+            <td rowspan="2"> linha 1, coluna 1</td>
+            <td> linha 1, coluna 2</td>
+            <td> linha 1, coluna 3</td>
+        </tr>
+        <tr>
+            <td> linha 2, coluna 1</td>
+            <td> linha 2, coluna 2</td>
+        </tr>
+        <tr>
+            <td> linha 3, coluna 2</td>
+            <td colspan="2"> linha 3, coluna 3</td>
+        </tr>
+    </table>
+~~~
+
+### Tags de Audiovisual
+- Imagens: Tipos de imagem jpeg, png, gif, svg, ico
+~~~
+    <figure>
+        <img src="assets/brazil-flag.png" alt="" width="100" title="Bandeira do Brasil">
+        <figcaption>Créditos: Algum Artista Qualquer</figcaption>
+    </figure>
+~~~
+
+- Vídeos mp4, ogg, WebM
+~~~
+    <video width="320" controls autoplay loop muted>
+        <source src="assets/20230513_160933.mp4">
+        <source src="assets/20230513_160933.ogg">
+        Seu Navegador não é compatível com a tag Vídeo
+    </video>
+~~~
+
+- Vídeos do Youtube
+~~~
+    <iframe width="420" height="315" src="https://www.youtube.com/embed/SsqXAP0EeEI">
+    </iframe>
+~~~
+
+- Áudio
+~~~
+     <audio controls autoplay loop muted>
+        <source src="assets/bad_to_the_bone.mp3" type="audio/mpeg">
+        <source src="assets/bad_to_the_bone.ogg" type="audio/ogg">
+        Seu Navegador não é compatível com a tag Audio
+    </audio>
+    <p>download</p>
+~~~
+
+### Estruturação com tags semânticas
 - Exemplo de arquivo HTML utilizando tags semânticas: header, main, footer, section, nav, aside...:
 ~~~
 <!DOCTYPE html>
@@ -337,7 +430,6 @@
 
 </html>
 ~~~
-
 
 
  <p align="center">
