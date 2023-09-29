@@ -328,3 +328,185 @@
 
 </html>
 ~~~
+
+### Form Example
+- Example of a form using HTML:
+~~~
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .label {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="POST">
+
+        <fieldset>
+            <legend>Registration</legend>
+
+            <label for="idAge" class="label">Age</label>
+            <input type="text" name="" id="">
+
+            <div>
+                <div>
+                    <label for="idCpf">CPF:</label>
+                </div>
+                <input type="text" name="" id="">
+            </div>
+
+            <label for="idName">Name:</label><br>
+            <input type="text" id="idName" name="nmName" value="João">
+
+        </fieldset>
+
+        <br><br>
+        <label for="idDesc">Description</label><br>
+        <!-- Multi-line text field -->
+        <textarea name="nmDesc" id="idDesc" cols="30" rows="10">innerText</textarea>
+        <!-- The value of the textarea is the innerText property -->
+
+        <!-- Selection box -->
+        <label for="idCars">Choose your Car:</label><br>
+        <select name="nmCars" id="idCars" size="3" multiple>
+            <option value="volvo">Volvo</option>
+            <option value="ford ka">Ford Ka</option>
+            <option value="fiat">Fiat</option>
+            <option value="lamborghini">Lamborghini</option>
+        </select>
+
+        <br><br>
+        <select name="cars" id="cars" size="3" multiple>
+            <optgroup label="Swedish Cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+            </optgroup>
+            <optgroup label="German Cars">
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </optgroup>
+        </select>
+
+        <br><br>
+        <!-- Data list (item selection) -->
+        <label for="idBrowsers">Browsers:</label><br>
+        <input list="idBrowsers">
+        <datalist id="idBrowsers">
+            <option value="Internet Explorer">IE</option>
+            <option value="Chrome">Chrome</option>
+            <option value="Firefox">Firefox</option>
+            <option value="Opera">Opera</option>
+            <option value="Safari">Safari</option>
+            <option value="Brave">Brave</option>
+            <option value="Edge">Edge</option>
+            <option value="Yahoo">Yahoo</option>
+        </datalist>
+
+        <br><br>
+        <!-- Buttons -->
+        <button type="reset">Clear</button>
+        <button type="submit">Submit</button>
+        <button type="button">Test</button>
+    </form>
+</body>
+
+</html>
+~~~
+
+### Form Example - Inputs
+- Example of form inputs types using HTML:
+~~~
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <!-- Single-line text field -->
+        <label for="idName" class="label">Name:</label>
+        <input type="text" name="nmName" id="idName" value="" size="35" minlength="2" maxlength="5" placeholder="Name" autocomplete="off" required>
+
+        <label for="idLastName" class="label">Last Name:</label>
+        <input type="text" name="nmLastName" id="idLastName" value="" pattern="[A-Za-z]{3}">
+
+        <!-- Phone Field -->
+        <label for="idTel" class="label">Phone:</label>
+        <input type="tel" name="nmTel" id="idTel" value="" pattern="\(\d{2}\) \d{4}-\d{4}">
+
+        <!-- Numeric Field -->
+        <label for="idTemp" class="label">Temperature</label>
+        <input type="number" name="nmTemp" id="idTemp" min="-5" max="100" step="0.01" autofocus>
+
+        <!-- Numeric Range -->
+        <label for="idInter" class="label">Interval</label>
+        <input type="range" name="nmInter" id="idInter" min="0" max="100" value="0" disabled>
+
+        <!-- Password Boxes -->
+        <label for="idPassword" class="label">Password</label>
+        <input type="password" name="nmPassword" id="idPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and both uppercase and lowercase letters, and at least 8 or more characters">
+
+        <!-- Email Boxes -->
+        <label for="idEmail" class="label">Email</label>
+        <input type="email" name="nmEmail" id="idEmail" value="Ivan.Borchardt@T-Systems.com" readonly>
+
+        <!-- Date Boxes -->
+        <label for="idDate" class="label">Date</label>
+        <input type="date" name="nmDate" id="idDate" min="2022-04-01" max="2022-05-30">
+
+        <!-- Local Date-Time Boxes -->
+        <label for="idLocalDateTime" class="label">Date: </label>
+        <input type="datetime-local" name="nmLocalDateTime" id="idLocalDateTime">
+
+        <!-- Time Boxes -->
+        <label for="idTime" class="label">Time</label>
+        <input type="time" name="nmTime" id="idTime">
+
+        <!-- Color Picker -->
+        <label for="idColor" class="label">Color</label>
+        <input type="color" name="nmColor" id="idColor">
+
+        <!-- Radio Buttons -->
+        <br><br>
+        <input type="radio" name="nmGender" id="idFemale" checked>
+        <label for="idFemale">Female</label>
+        <br>
+        <input type="radio" name="nmGender" id="idMale">
+        <label for="idMale">Male</label>
+        <br>
+        <input type="radio" name="nmGender" id="idLGBT">
+        <label for="idLGBT">LGBT</label>
+
+        <!-- Checkboxes -->
+        <br><br>
+        <input type="checkbox" name="nmBrands" id="idFordKa">
+        <label for="idFordKa">Ford Ka</label>
+        <br>
+        <input type="checkbox" name="nmBrands" id="idGol">
+        <label for="idGol">Gol</label>
+        <br>
+        <input type="checkbox" name="nmBrands" id="idFerrari">
+        <label for="idFerrari">Ferrari</label>
+
+        <br><br>
+        <input type="submit" name="" id="">
+        <input type="reset" name="" id="" value="Clear">
+        <input type="button" name="" id="" value="Test">
+    </form>
+</body>
+</html>
+~~~
