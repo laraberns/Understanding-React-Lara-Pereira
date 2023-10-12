@@ -506,3 +506,54 @@
 
     </script>
 ~~~
+
+### Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght)
+~~~
+    <script>
+        //Empty array
+        var carro = []
+
+        //Pre-initialized Array
+        const fruta = ['laranja', 'morango', 'abacate']
+
+        //Declaraing an Array with constructor
+        let legumes = new Array('brócolis', 'cenoura', 'alface')
+
+        //Positions
+        var frutaCitrica = fruta[2]
+
+        fruta[3] = "limao"
+        fruta[4] = "fisalis"
+        fruta[6] = "melancia"
+
+        //Array lenght
+        console.log(fruta.length);
+
+        //Push an element - end of an Array
+        fruta[fruta.length] = "melão"
+        fruta.push("Amora")
+
+        //Push an element - start of an Array
+        fruta.unshift("Banana")
+        
+        //Remove an element - start of an Array
+        var fruta3 = fruta.shift()
+
+        //Remove an element - end of an Array
+        var fruta4 = fruta.pop()
+
+        //Iterating an Array
+        for (let index = 0; index < fruta.length; index++) {
+            let element = fruta[index];
+            console.log(fruta[index]);
+        }
+
+        //Transform Array to String
+        console.log(fruta.toString());
+
+        //Passing the reference from Array to Var
+        var fruta2 = fruta
+        fruta[2] = "Limão"
+
+    </script>
+~~~

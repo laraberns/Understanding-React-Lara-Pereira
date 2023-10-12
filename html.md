@@ -1,6 +1,15 @@
 ## HTML
 
-### HTML Structure
+- [HTML Structure](#HTML-Structure)
+- [HTML Tags](#HTML-Tags)
+- [HTML Links](#HTML-Links)
+- [HTML Tables](#HTML-Tables)
+- [HTML Audiovisual Tags](#HTML-Audiovisual-Tags)
+- [HTML Structuring with Semantic Tags](#HTML-Structuring)
+- [HTML Form Example](#HTML-Form)
+- [HTML Form Example - Inputs](#HTML-Form-Inputs)
+
+### HTML Structure <a name="HTML-Structure"></a>
 ~~~
 <!DOCTYPE html>
 <html>
@@ -27,7 +36,7 @@
 - The <p> element defines a paragraph.
 ~~~
 
-### HTML Tags
+### HTML Tags <a name="HTML-Tags"></a>
 - Headings:
 ~~~
         <h1>Heading 1</h1>
@@ -58,7 +67,7 @@
         <p>x<sup>2</sup></p>
 ~~~
 
-- Quotation and Citation Elements:
+- Quotation and Citation Elements: 
 ~~~
         <p><q>Quoted Text</q></p>
         <p><blockquote>Text</blockquote></p>
@@ -117,7 +126,7 @@
         </details>
 ~~~
 
-### HTML Links
+### HTML Links <a name="HTML-Links"></a>
 - Link to Another Website:
 ~~~
         <p> <a href="https://www.entra21.com.br/" target="_blank">Entra21</a> is a program for employability and professional training.</p>
@@ -155,7 +164,7 @@
          <p>Download the <a href="assets/brazil-flag.png" download>Brazilian flag</a></p>
 ~~~
 
-### Tables
+### HTML Tables <a name="HTML-Tables"></a>
 - Minimum Table Structure:
 ~~~
       <table border="1">
@@ -212,7 +221,7 @@
     </table>
 ~~~
 
-### Audiovisual Tags
+### HTML Audiovisual Tags <a name="HTML-Audiovisual-Tags"></a>
 - Images: Image types jpeg, png, gif, svg, ico
 ~~~
     <figure>
@@ -246,7 +255,7 @@
     <p>Download</p>
 ~~~
 
-### Structuring with Semantic Tags
+### HTML Structuring with Semantic Tags <a name="HTML-Structuring"></a>
 - Example of an HTML file using semantic tags: header, main, footer, section, nav, aside...:
 ~~~
 <!DOCTYPE html>
@@ -329,7 +338,7 @@
 </html>
 ~~~
 
-### Form Example
+### HTML Form Example <a name="HTML-Form"></a>
 - Example of a form using HTML:
 ~~~
 <!DOCTYPE html>
@@ -420,7 +429,7 @@
 </html>
 ~~~
 
-### Form Example - Inputs
+### HTML Form Example - Inputs <a name="HTML-Form-Inputs"></a>
 - Example of form inputs types using HTML:
 ~~~
 <!DOCTYPE html>
