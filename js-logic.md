@@ -3,13 +3,13 @@
 - [JS - How to declare variables](#declare)
 - [JS - Types of data - Strings, Numbers, Boolean, Object...](#data)
 - [JS - Arithmetic operators](#operators)
-- [JS - Getting Elements from HTML](#GettingElements)
-- [JS - Selection Structures (If/Else and Switch/Case)](#Selection)
-- [JS - Repeating Structures (while, do/while, for)](#Repeating)
-- [JS - Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght)](#Arrays)
-- [JS - Functions](#Functions)
-- [JS - Events](#Events)
-- [JS - Strings Methods](#StringsMethods)
+- [JS - Getting Elements from HTML](#gettingelements)
+- [JS - Selection Structures (If/Else and Switch/Case)](#selection)
+- [JS - Repeating Structures (while, do/while, for)](#repeating)
+- [JS - Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght)](#arrays)
+- [JS - Functions](#functions)
+- [JS - Events](#events)
+- [JS - Strings Methods](#stringsmethods)
 
 ### JS - How to declare variables <a id="declare"></a>
 ~~~
@@ -275,7 +275,7 @@
 
 ~~~
 
-### JS - Getting Elements from HTML <a id="GettingElements"></a>
+### JS - Getting Elements from HTML <a id="gettingelements"></a>
 ~~~
     <script>
         var texto
@@ -361,7 +361,7 @@
 
 ~~~
 
-### JS - Selection Structures (If/Else and Switch/Case) <a id="Selection"></a>
+### JS - Selection Structures (If/Else and Switch/Case) <a id="selection"></a>
 ~~~
    <script>
 
@@ -485,7 +485,7 @@
     </script>
 ~~~
 
-### JS - Repeating Structures (while, do/while, for) <a id="Repeating"></a>
+### JS - Repeating Structures (while, do/while, for) <a id="repeating"></a>
 ~~~
     <script>
 
@@ -518,7 +518,7 @@
     </script>
 ~~~
 
-### JS - Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght) <a id="Arrays"></a>
+### JS - Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght) <a id="arrays"></a>
 ~~~
     <script>
         //Empty array
@@ -569,7 +569,7 @@
     </script>
 ~~~
 
-### JS - Functions <a id="Functions"></a>
+### JS - Functions <a id="functions"></a>
 ~~~
     <script>
 
@@ -615,7 +615,7 @@
     </script>
 ~~~
 
-### JS - Events <a id="Events"></a>
+### JS - Events <a id="events"></a>
 ~~~
     <script>
 
@@ -664,7 +664,7 @@
     </script>
 ~~~
 
-### JS - Strings Methods <a id="StringsMethods"></a>
+### JS - Strings Methods <a id="stringsmethods"></a>
 ~~~
      <script>
 
