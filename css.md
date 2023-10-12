@@ -1,6 +1,6 @@
 ## CSS
 
-- [CSS - Inline x External Style Sheet X Internal Style Sheet](#CSS-Inline)
+- [CSS - Inline x External Style Sheet X Internal Style Sheet](#CSSInline)
 - [CSS - Backgrounds Styles](#Backgrounds)
 - [CSS - Text Styles](#Text)
 - [CSS - Colors - Types](#Colors)
@@ -16,7 +16,7 @@
 - [CSS - Grid](#Grid)
 - [CSS - Media Queries](#Media)
 
-### CSS - Inline x External Style Sheet X Internal Style Sheet <a id="CSS-Inline"></a>
+### CSS - Inline x External Style Sheet X Internal Style Sheet <a id="CSSInline"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">

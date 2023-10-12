@@ -3,7 +3,7 @@
 - [JS - How to declare variables](#declare)
 - [JS - Types of data - Strings, Numbers, Boolean, Object...](#data)
 - [JS - Arithmetic operators](#operators)
-- [JS - Getting Elements from HTML](#Getting-Elements)
+- [JS - Getting Elements from HTML](#GettingElements)
 - [JS - Selection Structures (If/Else and Switch/Case)](#Selection)
 - [JS - Repeating Structures (while, do/while, for)](#Repeating)
 - [JS - Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght)](#Arrays)
@@ -275,7 +275,7 @@
 
 ~~~
 
-### JS - Getting Elements from HTML <a id="Getting-Elements"></a>
+### JS - Getting Elements from HTML <a id="GettingElements"></a>
 ~~~
     <script>
         var texto
