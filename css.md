@@ -1,22 +1,22 @@
 ## CSS
 
-- [CSS - Inline x External Style Sheet X Internal Style Sheet](#CSSInline)
-- [CSS - Backgrounds Styles](#Backgrounds)
-- [CSS - Text Styles](#Text)
-- [CSS - Colors - Types](#Colors)
-- [CSS - Fonts - Variants](#Fonts)
-- [CSS - Box Model](#BoxModel)
-- [CSS - Links](#Links)
-- [CSS - Lists](#Lists)
-- [CSS - Table](#Table)
-- [CSS - Filter for img files](#Filter)
-- [CSS - Flexbox](#Flexbox)
-- [CSS - Declaring variables at the --root](#Declaring)
-- [CSS - Form](#Form)
-- [CSS - Grid](#Grid)
-- [CSS - Media Queries](#Media)
+- [CSS - Inline x External Style Sheet X Internal Style Sheet](#cssinline)
+- [CSS - Backgrounds Styles](#backgrounds)
+- [CSS - Text Styles](#text)
+- [CSS - Colors - Types](#colors)
+- [CSS - Fonts - Variants](#fonts)
+- [CSS - Box Model](#boxmodel)
+- [CSS - Links](#links)
+- [CSS - Lists](#lists)
+- [CSS - Table](#table)
+- [CSS - Filter for img files](#filter)
+- [CSS - Flexbox](#flexbox)
+- [CSS - Declaring variables at the --root](#declaring)
+- [CSS - Form](#form)
+- [CSS - Grid](#grid)
+- [CSS - Media Queries](#media)
 
-### CSS - Inline x External Style Sheet X Internal Style Sheet <a id="CSSInline"></a>
+### CSS - Inline x External Style Sheet X Internal Style Sheet <a id="cssinline"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +59,7 @@
 
 ~~~
 
-### CSS - Backgrounds Styles <a id="Backgrounds"></a>
+### CSS - Backgrounds Styles <a id="backgrounds"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -127,7 +127,7 @@
 
 ~~~
 
-### CSS - Text Styles <a id="Text"></a>
+### CSS - Text Styles <a id="text"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -196,7 +196,7 @@
 </html>
 ~~~
 
-### CSS - Colors - Types <a id="Colors"></a>
+### CSS - Colors - Types <a id="colors"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -234,7 +234,7 @@
 </html>
 ~~~
 
-### CSS - Fonts - Variants <a id="Fonts"></a>
+### CSS - Fonts - Variants <a id="fonts"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -287,7 +287,7 @@
 </html>
 ~~~
 
-### CSS - Box Model <a id="BoxModel"></a>
+### CSS - Box Model <a id="boxmodel"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -403,7 +403,7 @@
 </html>
 ~~~
 
-### CSS - Links <a id="Links"></a>
+### CSS - Links <a id="links"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -454,7 +454,7 @@
 </html>
 ~~~
 
-### CSS - Lists <a id="Lists"></a>
+### CSS - Lists <a id="lists"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -518,7 +518,7 @@
 </html>
 ~~~
 
-### CSS - Table <a id="Table"></a>
+### CSS - Table <a id="table"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -643,7 +643,7 @@
 </html>
 ~~~
 
-### CSS - Filter for img files <a id="Filter"></a>
+### CSS - Filter for img files <a id="filter"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -758,7 +758,7 @@
 </html>
 ~~~
 
-### CSS - Flexbox <a id="Flexbox"></a>
+### CSS - Flexbox <a id="flexbox"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -847,7 +847,7 @@
 </html>
 ~~~
 
-### CSS - Declaring variables at the --root <a id="Declaring"></a>
+### CSS - Declaring variables at the --root <a id="declaring"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -890,7 +890,7 @@
 </html>
 ~~~
 
-### CSS - Form <a id="Form"></a>
+### CSS - Form <a id="form"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -947,7 +947,7 @@
 
 ~~~
 
-### CSS - Grid <a id="Grid"></a>
+### CSS - Grid <a id="grid"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -1079,7 +1079,7 @@
 </html>
 ~~~
 
-### CSS - Media Queries <a id="Media"></a>
+### CSS - Media Queries <a id="media"></a>
 
 ~~~
 <!DOCTYPE html>

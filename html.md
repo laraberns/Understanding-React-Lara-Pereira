@@ -1,15 +1,15 @@
 ## HTML
 
-- [HTML Structure](#HTMLStructure)
-- [HTML Tags](#HTMLTags)
-- [HTML Links](#HTMLLinks)
-- [HTML Tables](#HTMLTables)
-- [HTML Audiovisual Tags](#HTMLAudiovisualTags)
-- [HTML Structuring with Semantic Tags](#HTMLStructuring)
-- [HTML Form Example](#HTMLForm)
-- [HTML Form Example - Inputs](#HTMLFormInputs)
+- [HTML Structure](#structure)
+- [HTML Tags](#tags)
+- [HTML Links](#links)
+- [HTML Tables](#tables)
+- [HTML Audiovisual Tags](#audiovisualtags)
+- [HTML Structuring with Semantic Tags](#structuring)
+- [HTML Form Example](#form)
+- [HTML Form Example - Inputs](#forminputs)
 
-### HTML Structure <a id="HTMLStructure"></a>
+### HTML Structure <a id="structure"></a>
 ~~~
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,7 @@
 - The <p> element defines a paragraph.
 ~~~
 
-### HTML Tags <a id="HTMLTags"></a>
+### HTML Tags <a id="tags"></a>
 - Headings:
 ~~~
         <h1>Heading 1</h1>
@@ -126,7 +126,7 @@
         </details>
 ~~~
 
-### HTML Links <a id="HTMLLinks"></a>
+### HTML Links <a id="links"></a>
 - Link to Another Website:
 ~~~
         <p> <a href="https://www.entra21.com.br/" target="_blank">Entra21</a> is a program for employability and professional training.</p>
@@ -164,7 +164,7 @@
          <p>Download the <a href="assets/brazil-flag.png" download>Brazilian flag</a></p>
 ~~~
 
-### HTML Tables <a id="HTMLTables"></a>
+### HTML Tables <a id="tables"></a>
 - Minimum Table Structure:
 ~~~
       <table border="1">
@@ -221,7 +221,7 @@
     </table>
 ~~~
 
-### HTML Audiovisual Tags <a id="HTMLAudiovisualTags"></a>
+### HTML Audiovisual Tags <a id="audiovisualtags"></a>
 - Images: Image types jpeg, png, gif, svg, ico
 ~~~
     <figure>
@@ -255,7 +255,7 @@
     <p>Download</p>
 ~~~
 
-### HTML Structuring with Semantic Tags <a id="HTMLStructuring"></a>
+### HTML Structuring with Semantic Tags <a id="structuring"></a>
 - Example of an HTML file using semantic tags: header, main, footer, section, nav, aside...:
 ~~~
 <!DOCTYPE html>
@@ -338,7 +338,7 @@
 </html>
 ~~~
 
-### HTML Form Example <a id="HTMLForm"></a>
+### HTML Form Example <a id="form"></a>
 - Example of a form using HTML:
 ~~~
 <!DOCTYPE html>
@@ -429,7 +429,7 @@
 </html>
 ~~~
 
-### HTML Form Example - Inputs <a id="HTMLFormInputs"></a>
+### HTML Form Example - Inputs <a id="forminputs"></a>
 - Example of form inputs types using HTML:
 ~~~
 <!DOCTYPE html>
