@@ -9,7 +9,7 @@
 - [HTML Form Example](#HTML-Form)
 - [HTML Form Example - Inputs](#HTML-Form-Inputs)
 
-### HTML Structure <a name="HTML-Structure"></a>
+### HTML Structure <a id="HTML-Structure"></a>
 ~~~
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,7 @@
 - The <p> element defines a paragraph.
 ~~~
 
-### HTML Tags <a name="HTML-Tags"></a>
+### HTML Tags <a id="HTML-Tags"></a>
 - Headings:
 ~~~
         <h1>Heading 1</h1>
@@ -126,7 +126,7 @@
         </details>
 ~~~
 
-### HTML Links <a name="HTML-Links"></a>
+### HTML Links <a id="HTML-Links"></a>
 - Link to Another Website:
 ~~~
         <p> <a href="https://www.entra21.com.br/" target="_blank">Entra21</a> is a program for employability and professional training.</p>
@@ -164,7 +164,7 @@
          <p>Download the <a href="assets/brazil-flag.png" download>Brazilian flag</a></p>
 ~~~
 
-### HTML Tables <a name="HTML-Tables"></a>
+### HTML Tables <a id="HTML-Tables"></a>
 - Minimum Table Structure:
 ~~~
       <table border="1">
@@ -221,7 +221,7 @@
     </table>
 ~~~
 
-### HTML Audiovisual Tags <a name="HTML-Audiovisual-Tags"></a>
+### HTML Audiovisual Tags <a id="HTML-Audiovisual-Tags"></a>
 - Images: Image types jpeg, png, gif, svg, ico
 ~~~
     <figure>
@@ -255,7 +255,7 @@
     <p>Download</p>
 ~~~
 
-### HTML Structuring with Semantic Tags <a name="HTML-Structuring"></a>
+### HTML Structuring with Semantic Tags <a id="HTML-Structuring"></a>
 - Example of an HTML file using semantic tags: header, main, footer, section, nav, aside...:
 ~~~
 <!DOCTYPE html>
@@ -338,7 +338,7 @@
 </html>
 ~~~
 
-### HTML Form Example <a name="HTML-Form"></a>
+### HTML Form Example <a id="HTML-Form"></a>
 - Example of a form using HTML:
 ~~~
 <!DOCTYPE html>
@@ -429,7 +429,7 @@
 </html>
 ~~~
 
-### HTML Form Example - Inputs <a name="HTML-Form-Inputs"></a>
+### HTML Form Example - Inputs <a id="HTML-Form-Inputs"></a>
 - Example of form inputs types using HTML:
 ~~~
 <!DOCTYPE html>

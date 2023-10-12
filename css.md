@@ -1,6 +1,22 @@
 ## CSS
 
-### CSS - Inline x External Style Sheet X Internal Style Sheet
+- [CSS - Inline x External Style Sheet X Internal Style Sheet](#CSS-Inline)
+- [CSS - Backgrounds Styles](#Backgrounds)
+- [CSS - Text Styles](#Text)
+- [CSS - Colors - Types](#Colors)
+- [CSS - Fonts - Variants](#Fonts)
+- [CSS - Box Model](#BoxModel)
+- [CSS - Links](#Links)
+- [CSS - Lists](#Lists)
+- [CSS - Table](#Table)
+- [CSS - Filter for img files](#Filter)
+- [CSS - Flexbox](#Flexbox)
+- [CSS - Declaring variables at the --root](#Declaring)
+- [CSS - Form](#Form)
+- [CSS - Grid](#Grid)
+- [CSS - Media Queries](#Media)
+
+### CSS - Inline x External Style Sheet X Internal Style Sheet <a id="CSS-Inline"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +59,7 @@
 
 ~~~
 
-### CSS Backgrounds Styles
+### CSS - Backgrounds Styles <a id="Backgrounds"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -111,7 +127,7 @@
 
 ~~~
 
-### CSS Text Styles
+### CSS - Text Styles <a id="Text"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -180,7 +196,7 @@
 </html>
 ~~~
 
-### CSS Colors - Types
+### CSS - Colors - Types <a id="Colors"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -218,7 +234,7 @@
 </html>
 ~~~
 
-### CSS Fonts - Variants
+### CSS - Fonts - Variants <a id="Fonts"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -271,7 +287,7 @@
 </html>
 ~~~
 
-### CSS Box Model
+### CSS - Box Model <a id="BoxModel"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -387,7 +403,7 @@
 </html>
 ~~~
 
-### CSS - Links
+### CSS - Links <a id="Links"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -438,7 +454,7 @@
 </html>
 ~~~
 
-### CSS - Lists
+### CSS - Lists <a id="Lists"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -502,7 +518,7 @@
 </html>
 ~~~
 
-### CSS - Table
+### CSS - Table <a id="Table"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -627,7 +643,7 @@
 </html>
 ~~~
 
-### CSS - Filter for img files
+### CSS - Filter for img files <a id="Filter"></a>
 ~~~
 <!DOCTYPE html>
 <html lang="en">
@@ -742,7 +758,7 @@
 </html>
 ~~~
 
-### CSS - Flexbox
+### CSS - Flexbox <a id="Flexbox"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -831,7 +847,7 @@
 </html>
 ~~~
 
-### CSS - Declaring variables at the --root
+### CSS - Declaring variables at the --root <a id="Declaring"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -874,7 +890,7 @@
 </html>
 ~~~
 
-### CSS - Form
+### CSS - Form <a id="Form"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -931,7 +947,7 @@
 
 ~~~
 
-### CSS - Grid
+### CSS - Grid <a id="Grid"></a>
 
 ~~~
 <!DOCTYPE html>
@@ -1063,7 +1079,7 @@
 </html>
 ~~~
 
-### CSS - Media Queries
+### CSS - Media Queries <a id="Media"></a>
 
 ~~~
 <!DOCTYPE html>

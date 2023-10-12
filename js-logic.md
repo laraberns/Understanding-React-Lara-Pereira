@@ -1,6 +1,17 @@
 ## JavaScript - Logic Programming
 
-### How to declare variables
+- [JS - How to declare variables](#declare)
+- [JS - Types of data - Strings, Numbers, Boolean, Object...](#data)
+- [JS - Arithmetic operators](#operators)
+- [JS - Getting Elements from HTML](#Getting-Elements)
+- [JS - Selection Structures (If/Else and Switch/Case)](#Selection)
+- [JS - Repeating Structures (while, do/while, for)](#Repeating)
+- [JS - Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght)](#Arrays)
+- [JS - Functions](#Functions)
+- [JS - Events](#Events)
+- [JS - Strings Methods](#StringsMethods)
+
+### JS - How to declare variables <a id="declare"></a>
 ~~~
     <script>
         //Global scope variables
@@ -35,7 +46,7 @@
 
 ~~~
 
-### Types of data - Strings, Numbers, Boolean, Object...
+### JS - Types of data - Strings, Numbers, Boolean, Object... <a id="data"></a>
 ~~~
    <script>
         /*
@@ -155,7 +166,7 @@
 
 ~~~
 
-### Arithmetic operators
+### JS - Arithmetic operators <a id="operators"></a>
 ~~~
    <script>
 
@@ -264,7 +275,7 @@
 
 ~~~
 
-### Getting Elements from HTML
+### JS - Getting Elements from HTML <a id="Getting-Elements"></a>
 ~~~
     <script>
         var texto
@@ -350,7 +361,7 @@
 
 ~~~
 
-### Selection Structures (If/Else and Switch/Case)
+### JS - Selection Structures (If/Else and Switch/Case) <a id="Selection"></a>
 ~~~
    <script>
 
@@ -474,7 +485,7 @@
     </script>
 ~~~
 
-### Repeating Structures (while, do/while, for)
+### JS - Repeating Structures (while, do/while, for) <a id="Repeating"></a>
 ~~~
     <script>
 
@@ -507,7 +518,7 @@
     </script>
 ~~~
 
-### Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght)
+### JS - Arrays - Declaring an Array, Array methods (push( ), pop( ), shift( ), unshift( ), lenght) <a id="Arrays"></a>
 ~~~
     <script>
         //Empty array
@@ -554,6 +565,215 @@
         //Passing the reference from Array to Var
         var fruta2 = fruta
         fruta[2] = "Limão"
+
+    </script>
+~~~
+
+### JS - Functions <a id="Functions"></a>
+~~~
+    <script>
+
+        var pesoIdealF = calcularPesoIdeal("f", 1.60)
+        console.log(pesoIdealF);
+
+        pesoIdealM = calcularPesoIdeal("m", 1.60)
+        console.log(pesoIdealM);
+
+        /*
+            - Functions are "Tasks"/"Actions" performed as soon as they are called or based of some event.
+            - A function can take parameters and return a result. 
+        */
+
+        // declaring a function
+        function calcularPesoIdeal(genero, altura) {
+
+            let pesoIdeal = 0
+            if (genero == "f") {
+                pesoIdeal = (62.1 * altura) - 44.7
+            } else {
+                pesoIdeal = (72.7 * altura) - 58
+            }
+
+            return pesoIdeal
+        }
+
+        // declaring a var - the content is a function
+        var pesoIdeal2 = function(genero, altura) {
+
+            let pesoIdeal = 0
+            if (genero == "f") {
+                pesoIdeal = (62.1 * altura) - 44.7
+            } else {
+                pesoIdeal = (72.7 * altura) - 58
+            }
+
+            return pesoIdeal
+        }
+
+        console.log("peso Ideal 2 : " + pesoIdeal2("f", 1.57));
+
+    </script>
+~~~
+
+### JS - Events <a id="Events"></a>
+~~~
+    <script>
+
+    // <input type="button" id="idBotao" value="CLique Me" onclick="testarClique()">
+
+        //Event Handler Inline
+        function testarClique() {
+            console.log("Clicou em clique me!!!");
+        }
+
+        //Event Handler Nivel 1 
+        var botao = document.getElementById("idBotao2")
+    
+        botao.onclick = tratamentoBotao2
+
+        function tratamentoBotao2() {
+            console.log("Clicou Botão 2");  
+        }
+
+        //Anonymous Functions
+        botao.onmouseover = function(){
+            console.log("Passou o mouse por cima do botão 2");
+        }
+
+        //Event Handler Level 2
+        var botao3 = document.getElementById("idBotao3")
+
+        botao3.addEventListener("click", tratamentoBota3) //Callback Function
+
+        function tratamentoBota3() {
+            console.log("Clicou Botão 3");  
+        }
+
+        //Event Handler - Submit Input
+        const botao4 = document.getElementById("idBotao4")
+
+        botao4.addEventListener("click", function(event){
+            event.preventDefault() //previne o comportamento padrao do formulario 
+            console.log(event);
+
+            let email = document.getElementById("idEmail").value
+            console.log("Email: " + email);
+        })
+
+
+    </script>
+~~~
+
+### JS - Strings Methods <a id="StringsMethods"></a>
+~~~
+     <script>
+
+        // How to declare Strings (typeof = string)
+        const string1 = "A string primitive"; 
+        const string2 = 'Also a string primitive';
+        const string3 = `Yet another string primitive`;
+        const string4 = String(1); 
+        const string5 = String(true);
+        const string6 = String("Teste");
+
+        // How to declare Strings (typeof = object)
+        const string7 = new String("A String object")
+
+        // .valueOf() Property
+        console.log(string6.valueOf()); // "Teste"
+        console.log(string7.valueOf()); // "A String object"
+
+        // String Methods 
+        var gato = "cat"
+        console.log(gato[2]);
+        console.log("cat"[1]);
+        console.log("catwerr".length);
+        console.log("cat".charAt(2));
+
+        // Comparing Strings
+        const a = "a";
+        const b = "b";
+ 
+        // ASCII - Table / CharCode
+        if (a < b) {
+            console.log(`${a} is less than ${b}`);
+        } else if (a > b) {
+            console.log(`${a} is greater than ${b}`);
+        } else {
+            console.log(`${a} and ${b} are equal.`);
+        }
+
+           console.log(String.fromCharCode(79,51)); //Return the character from ASCII Table
+
+        // Comparing Variables - Text - Lower case/Upper case
+        const upperA = "A"
+        console.log(a == upperA); //false
+        console.log(a.toLowerCase() == upperA.toLowerCase()); //true
+        console.log(a.toUpperCase() == upperA.toUpperCase()); //true
+        console.log(areEqualCaseInsensitive(a, upperA));
+
+        function areEqualCaseInsensitive(str1, str2) {
+            return str1.toLowerCase() === str2.toLowerCase()
+        }
+
+        // Comparing Variables - Number/String
+        const numUm = 1
+        const charUm = "1" 
+        if (numUm == charUm){
+            console.log("numUm é igual charUm"); //numUm é igual charUm
+        }
+
+        if (numUm === charUm){
+            console.log("numUm é igual charUm");
+        }else{
+            console.log("numUm é diferente de charUm"); //"numUm é diferente de charUm
+        }
+
+        // String Template / Literal Template
+        const total = 12.4
+        const totalComDesconto = 10.00
+       
+        console.log(`o total da conta é: ${total} , com desconto fica: ${totalComDesconto}`);
+
+        // String.raw
+        const filePath = String.raw`C:\Development\profile\aboutme.html`
+        console.log(`The file was uploaded from: ${filePath}`);
+
+        // Instance Methods
+        const texto1 = "texto"
+        const text2 = "123"
+        console.log(texto1.charAt(2)); // x
+        console.log(texto1.charCodeAt(2)); // 120
+        console.log(texto1.concat(text2, " ad", " 12")); // texto 123 ad 12
+
+        const str1 = 'Cats are the best!';
+        console.log(str1.endsWith('best!')); // true
+        console.log(str1.endsWith('best', 17)); // true
+
+        const sentence = 'The quick brown fox jumps over the lazy dog.';
+        const word = 'fox';
+
+        console.log(sentence.includes(word)); // true
+    
+        let text = "Apple, Banana, Kiwi";
+        console.log(text.slice(7, 13)); // Banana
+        console.log(text.substring(7, 13)); // Banana
+        console.log(text.substr(7, 6)); // Banana
+        
+        let text3 = "Please visit Microsoft!";
+        let newText = text3.replace("Microsoft", "W3Schools"); // Please visit W3Schools!
+
+        let text4 = "Please visit Microsoft!";
+        let newText2 = text4.replace(/MICROSOFT/i, "W3Schools"); // Please visit W3Schools!
+
+        let text5 = "Please visit Microsoft and Microsoft!";
+        let newText5 = text5.replace(/Microsoft/g, "W3Schools"); // Please visit W3Schools!
+
+        let text6 = "5";
+        let padded = text6.padStart(4,"1"); // 1115
+
+        let text7 = "Please, visit, Microsoft, and, Microsoft!";
+        let array7 = text7.split(",") ['Please', ' visit', ' Microsoft', ' and', ' Microsoft!']
 
     </script>
 ~~~
