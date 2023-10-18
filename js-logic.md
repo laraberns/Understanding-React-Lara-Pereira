@@ -951,7 +951,7 @@
 ~~~
 
 ### JS - Where To Save Script <a id="jsfiles"></a>
-![Alt text](image.png)
+![Alt text](./assets/image.png)
 
 
 ### JS - Windows Types of Alerts <a id="objectstructure"></a>
