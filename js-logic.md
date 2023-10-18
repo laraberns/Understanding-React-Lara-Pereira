@@ -12,6 +12,7 @@
 - [JS - Strings Methods](#stringsmethods)
 - [JS - CSS with JavaScript](#csswithjs)
 - [JS - Creating Elements with .innerHTML and .write](#innerhtml)
+- [JS - Creating Elements with .createElement and .appendChild](#createelement)
 - [JS - Object - Structure](#objectstructure)
 - [JS - Where To Save Script](#jsfiles)
 - [JS - Windows Types of Alerts](#alertstypes)
@@ -866,7 +867,7 @@
 
 ~~~
 
-### JS - Creating Elements with .innerHTML and .write <a id="innerhtml"></a>
+### JS - Creating Elements with .createElement and .appendChild <a id="createelement"></a>
 ~~~
 
     <script>
