@@ -10,6 +10,10 @@
 - [JS - Functions](#functions)
 - [JS - Events](#events)
 - [JS - Strings Methods](#stringsmethods)
+- [JS - CSS with JavaScript](#csswithjs)
+- [JS - Creating Elements with .innerHTML and .write](#innerhtml)
+- [JS - Object - Structure](#objectstructure)
+- [Where To Save Script](#jsfiles)
 
 ### JS - How to declare variables <a id="declare"></a>
 ~~~
@@ -612,6 +616,23 @@
 
         console.log("peso Ideal 2 : " + pesoIdeal2("f", 1.57));
 
+         // arrow function 
+        var pesoIdeal3 = (genero, altura) => { //arrow 
+
+            let pesoIdeal = 0
+            if (genero == "f") {
+                pesoIdeal = (62.1 * altura) - 44.7
+            } else {
+                pesoIdeal = (72.7 * altura) - 58
+            }
+
+            return pesoIdeal
+        }
+
+        // arrow function with one parameter and one line of instruction
+        var dobro = num => num * 2
+        console.log(dobro(5));
+
     </script>
 ~~~
 
@@ -775,5 +796,193 @@
         let text7 = "Please, visit, Microsoft, and, Microsoft!";
         let array7 = text7.split(",") ['Please', ' visit', ' Microsoft', ' and', ' Microsoft!']
 
+    </script>
+~~~
+
+### JS - CSS with JavaScript <a id="csswithjs"></a>
+~~~
+
+   <style>
+        body{
+            --cor : pink;
+        }
+        :root {
+            --tituloPrincipal: #ffff00; 
+        }
+
+        .verde{
+            color: var(--cor);
+        }
+
+        .violeta{
+            color: violet;
+        }
+
+    </style>
+
+   <script>
+
+        var btCor = document.getElementById("idBtCor")
+
+        // changing property of var --tituloPrincipal
+        btCor.onclick = function(){
+            let cor = document.getElementById("idCor").value
+            document.body.style.setProperty('--tituloPrincipal', cor);
+        }
+
+        // changing classList of titulo1 when mouseenter
+        titulo1.onmouseenter = function(){
+            titulo1.classList.add("verde")
+            titulo1.classList.remove("violeta")
+        }
+
+        // changing classList of titulo1 when mouseout
+        titulo1.onmouseout = function() {
+            titulo1.classList.add("violeta")
+            titulo1.classList.remove("verde")
+        }
+
+    </script>
+~~~
+
+### JS - Creating Elements with .innerHTML and .write <a id="innerhtml"></a>
+~~~
+
+   <script>
+        var texto = "Teste teste teste"
+
+        var elementoDiv = document.getElementById("idDiv")
+        
+        var elementoDiv2 = document.getElementById("idDiv2")
+        elementoDiv2.innerHTML = `
+                                    <p>${texto}</p>
+                                    <input type='submit'> 
+                                 `
+
+        document.write("<DIV>" + texto + "</DIV>")
+
+    </script>
+
+~~~
+
+### JS - Creating Elements with .innerHTML and .write <a id="innerhtml"></a>
+~~~
+
+    <script>
+        var btInclui = document.getElementById("btIdIncluir")
+
+        btInclui.addEventListener("click", function(event) {
+            event.preventDefault()
+
+            //capture whole form 
+            let formulario = document.getElementById("frmIdAdiciona")
+
+            //extract date from user
+            let usuario = obtemUsuario(formulario)
+
+            //create row from user info
+            let usuarioTr = montaTr(usuario)
+
+            //show row on body
+            let tBody = document.getElementById("tboIdLinha") 
+            tBody.appendChild(usuarioTr)
+
+            //reset form - clear fields
+            formulario.reset()
+        })
+
+
+        function obtemUsuario(formulario) {
+            let usuario = {
+                userId   : formulario.inNmUserId.value,
+                password : formulario.inNmPass.value,
+                name     : formulario.inNmNome.value,
+                cpf      : formulario.inNmCpf.value,
+                tipo     : formulario.inNmTipoUser.value
+            }
+
+            return usuario
+        }
+
+        // create row (tr)
+        function montaTr(usuario) {
+            let usuarioTr = document.createElement("tr")
+
+            usuarioTr.classList.add("trClUsuarioData")
+            
+            usuarioTr.appendChild(montaTd(usuario.userId, "tdClInfoUserId"))
+            usuarioTr.appendChild(montaTd(usuario.password, "tdClInfoSenha"))
+            usuarioTr.appendChild(montaTd(usuario.name, "tdClInfoNome"))
+            usuarioTr.appendChild(montaTd(usuario.cpf, "tdClInfoCpf"))
+            usuarioTr.appendChild(montaTd(usuario.tipo, "tdClInfoTipoUser"))
+
+            return usuarioTr
+        }
+
+        // create column (td)
+        function montaTd(dado, classe){
+            let usuarioTd = document.createElement("td")
+
+            usuarioTd.textContent = dado
+            usuarioTd.classList.add(classe)
+
+            return usuarioTd
+        }
+    </script>
+
+~~~
+
+### JS - Object - Structure <a id="objectstructure"></a>
+~~~
+ <script>
+
+        //JavaScript Object - Structure
+        let usuario = {
+           userId : "User1", //Atributo... 
+           password : "SohEuSei",
+           nome : "Joao" 
+        }
+
+        usuario.userId = "XPTO"
+        console.log(usuario.userId); 
+
+        //JSON
+    </script>
+~~~
+
+### JS - Where To Save Script <a id="jsfiles"></a>
+![Alt text](image.png)
+
+
+### JS - Windows Types of Alerts <a id="objectstructure"></a>
+~~~
+<script>
+            //Alerts 
+             function alerta(){
+                console.log("antes do alert ");
+                alert("Olá isso é um alerta")    
+                console.log("depois do alert ");
+            }
+
+            //Window Confirm
+             function confirmar(){
+                var confirma;
+             
+                confirma = window.confirm("Confirma a exclusão?");
+                
+                if (confirma) {
+                    console.log("Você clicou em confirmar");
+                }else{
+                    console.log("Você clicou em cancelar");
+                }
+            }
+
+            //Prompt alert
+             function perguntar(){
+                var idade; 
+
+                idade = window.prompt("Digite sua idade:"); 
+                console.log(idade); 
+            }
     </script>
 ~~~
