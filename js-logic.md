@@ -13,7 +13,7 @@
 - [JS - CSS with JavaScript](#csswithjs)
 - [JS - Creating Elements with .innerHTML and .write](#innerhtml)
 - [JS - Object - Structure](#objectstructure)
-- [Where To Save Script](#jsfiles)
+- [JS - Where To Save Script](#jsfiles)
 
 ### JS - How to declare variables <a id="declare"></a>
 ~~~
