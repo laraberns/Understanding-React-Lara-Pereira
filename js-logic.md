@@ -14,6 +14,7 @@
 - [JS - Creating Elements with .innerHTML and .write](#innerhtml)
 - [JS - Object - Structure](#objectstructure)
 - [JS - Where To Save Script](#jsfiles)
+- [JS - Windows Types of Alerts](#alertstypes)
 
 ### JS - How to declare variables <a id="declare"></a>
 ~~~
@@ -954,7 +955,7 @@
 ![Alt text](./assets/image.png)
 
 
-### JS - Windows Types of Alerts <a id="objectstructure"></a>
+### JS - Windows Types of Alerts <a id="alertstypes"></a>
 ~~~
 <script>
             //Alerts 
