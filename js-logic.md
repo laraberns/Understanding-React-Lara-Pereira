@@ -16,6 +16,12 @@
 - [JS - Object - Structure](#objectstructure)
 - [JS - Where To Save Script](#jsfiles)
 - [JS - Windows Types of Alerts](#alertstypes)
+- [JS - Objects](#jsobjects)
+- [JS - Arrays Methods](#arraysmethods)
+- [JS - Let x Var x Const](#letvarconst)
+- [JS - Matrix](#matrix)
+- [JS - Console](#console)
+- [JS - Short Circuit](#shortcircuit)
 
 ### JS - How to declare variables <a id="declare"></a>
 ~~~
@@ -521,6 +527,36 @@
             console.log("For: " + i);
         }
 
+        var vetor = ["item1", "item2", "item3", "item4", "item5"]
+
+        var pessoa = {
+            nome : "Joao", 
+            sobrenome : "Silva", 
+            idade : 25, 
+            sexo : "m"
+        }
+
+        //forEach Array 
+        vetor.forEach((element, index, array) => {
+            console.log(element);
+            console.log(index);
+            console.log(array);
+        });
+
+        //for in
+        for (const key in vetor) {
+            console.log("for in 1:" + key);
+        }
+
+        for (const key in pessoa) {
+            console.log("for in 2:" + pessoa[key]);
+        }
+
+        //for of (objetos iteraveis - alguma coisa parecida com um array...)
+        for (const iterator of vetor) {
+            console.log(iterator);
+        }
+
     </script>
 ~~~
 
@@ -986,5 +1022,473 @@
                 idade = window.prompt("Digite sua idade:"); 
                 console.log(idade); 
             }
+    </script>
+~~~
+
+### JS - Objects <a id="jsobjects"></a>
+~~~
+    <script>
+
+        //JSObject 
+        const user = {
+            id : "XPTO123", 
+            funcao: "Administrador", 
+            bloqueado: true, 
+            instancias: 2, 
+            navegadores : ["IE", "chrome", "edge"], 
+            pessoa1: {
+                nome : "Joao", 
+                sobrenome : "Silva", 
+                idade : 25, 
+                sexo : "m",
+                nomeCompleto : function(){
+                    return this.nome + " " + this.sobrenome
+                }
+            } 
+        }
+
+        console.log(user.pessoa1.nomeCompleto());
+        console.log(user.pessoa1.nome + " " + user.pessoa1.sobrenome);
+        console.log(user.navegadores[1]);
+
+    </script>
+~~~
+
+### JS - Arrays Methods <a id="arraysmethods"></a>
+~~~
+   <script>
+
+        //join array into string and add separator (arquivos .csv)
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+        console.log(fruits.join(";"));
+
+        //delete position (stay undefined)
+        delete fruits[1];
+        console.log(fruits);
+
+        //Concat arrays into new array
+        const myGirls = ["Cecilie", "Lone"];
+        const myBoys = ["Emil", "Tobias", "Linus"];
+        const arr3 = ["Robin", "Morgan"];
+
+        const myChildren = myGirls.concat(myBoys, arr3);
+        console.log(myChildren);
+
+        //Transformando matrix into an array
+        const myArr = [[1, 2], [3, 4], [5, 6]];
+        const newArr = myArr.flat();
+        console.log(newArr);
+
+        //insert two itens into array at position 2
+        const fruits2 = ["Banana", "Orange", "Apple", "Mango"];
+        fruits2.splice(2, 0, "Lemon", "Kiwi");
+        console.log(fruits2);
+
+        /erasing element from defined position
+        fruits2.splice(3, 1)
+        console.log(fruits2);
+
+        //Copy of part of an array
+        const fruits3 = ["Banana", "Orange", "Apple", "Mango"];
+        const fruits4 = fruits3.slice(1);
+        console.log(fruits4);
+
+        //Finding index of item
+        const fruits6 = ["Apple", "Orange", "Apple", "Mango"];
+        let position = fruits6.indexOf("Apple", 1);
+
+        //filter 
+        let over18 = idades.filter(buscarMaior18)
+        console.log(over18);
+
+        function buscarMaior18(value, index, array) {
+            return value > 18
+        }
+
+        //arrow function
+        let over18_3 = idades.filter(value => value > 18)
+        console.log(over18_3);
+
+        //map
+        var numbers3 = numbers1.map(function(value, index, array){
+            return value * 2
+        })
+        console.log(numbers3);
+
+        //reduce
+        var numbers4 = [4, 3, 4, 1, 4]
+        var soma = numbers4.reduce(somarValores, 0)
+        console.log(soma);
+
+        function somarValores(total, value, index, array) {
+            return total = total + value 
+        }        
+        
+        //sort
+        var num = [2, 30, 10, 1, 0, 23, 12, 21, 100]
+        num.reverse()
+        console.log(num);
+
+        //sort increasing
+        num.sort(function(a, b){
+            if (a > b) {
+                return 1
+            }
+            if (a < b) {
+                return -1
+            }
+            return 0 
+        })
+        console.log(num);
+        
+        //sort decreasing
+        num.sort(function(a, b){
+            if (a < b) {
+                return 1
+            }
+            if (a > b) {
+                return -1
+            }
+            return 0 
+        })
+        console.log(num);
+    </script>
+~~~
+
+### JS - Let x Var x Const <a id="letvarconst"></a>
+~~~
+    <script>
+
+        //3 Scopes - Global, Functional, Local/Block
+        //4 ways to declare: var, let, const e "no words"
+        
+        //global scope ONLY - no word reserved
+        texto1 = "Texto" 
+
+        //var - global scope - can be redeclared - problem!
+        var nome = "Joao"
+        var nome = "Igor"
+
+        /*Hoisting of var 
+            Hoisting is a JavaScript mechanism that makes
+            variable and function declarations are moved to
+            the top of its scope before code execution.
+        */
+        testeHoisting = "12345667"
+        console.log("Log 4: " + testeHoisting); //1234567
+        var testeHoisting = "Teste Hoisting"
+
+        //let
+        let sobreNome = "Silva"
+        //let sobreNome = "teste let" //error - cant be redeclared
+
+        let testeLetGlobal = "teste let global" //Let - block scope
+        testeEscopoLet()
+   
+        function testeEscopoLet() {
+            console.log("Log 7:" + testeLetGlobal); //"teste let global"
+        
+            let testeLetLocal = "teste let local" 
+            console.log("Log 8:"+ testeLetLocal);   //"teste let local" 
+            
+            let testeLetLocal2 = "teste let local 2"
+            console.log("Log 9:" + testeLetLocal2); //"teste let local 2" 
+
+            if (true) {
+                let testeLetLocal2 = 123
+                console.log("Log 10:" +  testeLetLocal2); //123
+            }
+        }
+
+        //const - array and elements can be changed of a const
+        const x = [1, 2, 3]
+        //x = [3,4,5,6]
+        x.push(4)
+        x[4] = 8
+
+        console.log(x);
+
+        const aviador = {
+            nome: "Santos Dumont", 
+            aeronave: "14 Bis", 
+            data: "23 de outubro de 1906"
+        }
+
+        aviador.nome = "Albero Santos Dumont"
+        console.log(aviador);
+
+      // parameters of functions
+        testeParamtros("valor1")
+
+        function testeParamtros(params) {
+            console.log(params); //"valor1"
+            params = "valor2"
+            console.log(params); //"valor2"
+        }
+
+        console.log("antes do for " + index);  //"antes do for undefined"
+     
+        for (var index = 5;index < 10; index++) {
+            console.log("dentro do For " + index);
+        }
+        console.log("depois do for " + index); //"depois do for 10"
+
+        while(testeEscopoX != false) //testeEscopoX = undefined
+        {
+            console.log("Passou pelo while..."); //going to read it one time
+            var testeEscopoX = false
+        }
+
+    </script>
+~~~
+
+### JS - Matrix <a id="matrix"></a>
+~~~
+    <script>
+
+        //matrix = array of arrays     
+
+        //j=           0   1   2   3      i
+        var matriz = [[1, 34, 45, 5],//  0
+                      [4, 25, 11, 5],//  1 
+                      [6,  2, 35, 6],//  2
+                      [7,  4,  7, 8]]//  3
+
+        //Acessing specific position
+        let i = 3
+        let j = 2
+        var x = matriz[i][j]
+        console.log(x); //7
+        
+        //Iterating array - 2d
+        console.log(matriz.length); //4
+        console.log(matriz[1].length) //4
+        
+        //Iterating matrix - 2d
+        for (let i = 0; i < matriz.length; i++) {
+            for (let j = 0; j < matriz[i].length; j++) {
+                console.log(matriz[i][j]);
+            }
+        }
+
+        //matrix - 3d
+        var matriz3D = [[[1,   2], [3,   4], [5,   6]], 
+                        [[7,   8], [9,  10], [11, 12]], 
+                        [[13, 14], [15, 16], [17, 18]]]
+
+        console.log(matriz3D[0][0][1]); //2
+
+        //Example
+        var pizzas = []
+        
+        var pizza1 = []
+        pizza1[0] = "Grande"
+        pizza1[1] = 35
+        pizza1[2] = 35.00
+        pizzas.push(pizza1)
+        
+        var pizza3 = []
+        pizza3[0] = "pequena"
+        pizza3[1] = 15
+        pizza3[2] = 15.00
+        pizzas.push(pizza3)
+
+        var pizza = []
+        pizza[0] = "Gigante"
+        pizza[1] = 50        //diâmetro    
+        pizza[2] = 50.00     //preço 
+        pizzas.push(pizza)
+        
+        var pizza2 = []
+        pizza2[0] = "media"
+        pizza2[1] = 25
+        pizza2[2] = 25.00
+        pizzas.push(pizza2)
+
+        console.table(pizzas) //matrix of each array
+
+        //calculando a area da pizza
+        pizzas.forEach(pizza => {
+            let raio = pizza[1] / 2;
+            let area = Math.PI * (raio * raio)
+            console.log(area);
+            pizza.push(area)
+
+            let precoCm2 = pizza[2] / area
+            pizza.push(precoCm2)
+        })
+        console.table(pizzas);
+
+        //Sort matrix of pizzas using "precoCm2"
+        pizzas.sort(function(a, b){
+            if (a[3] > b[3]) {
+                return 1
+            }
+            if (a[3] < b[3]) {
+                return -1
+            }
+            return 0 
+        })
+
+        console.table(pizzas)
+
+    </script>
+~~~
+
+### JS - Console <a id="console"></a>
+~~~
+    <script>
+
+        //Log
+        console.log("Isso é um log...")
+
+        //Clear
+        //console.clear()
+
+        //Error
+        console.error("Isso é uma mensagem de erro!")
+
+        //Warnings
+        console.warn("Isso é uma mensagem de aviso!")
+        
+        //Hided for user
+        console.debug("Isso é um registro para debug")
+        
+        //Info
+        console.info("Isso é uma informação")
+        
+        //Table - works with arrays, objects, matrix, array of objects
+        var vetor = [25, 20, 45, 50]
+        console.table(vetor)
+        
+        //Time - count time to execute task
+        console.time("label")
+        var teste = 0
+        for (let index = 0; index < 10000; index++) {
+            teste++
+            if (index == 5000) {
+                console.timeLog("label")   
+            } 
+        }
+        console.timeEnd("label")
+        
+        //List of object
+        var obj = {
+            nome: "Eu mesmo",
+            idade: 35,
+            cpf: "004.742.879.12",
+            cargo: "Tecnico"
+        }
+        console.dir(obj)
+        
+        //List of object - xml
+        console.dirxml(obj)
+        
+        //Assert - save message if its false on the console 
+        const msn = "# é ímpar!"
+        for (let index = 0; index < 10; index++) {
+            console.assert(index % 2 == 0, { index, msn })
+        }
+        
+        //Count() - how mandy times function is called
+        let user = "";
+        
+        function greet() {
+            console.count("gree");
+            return `hi ${user}`;
+        }
+        
+        user = "bob";
+        greet(); //1
+        user = "alice";
+        greet(); //2
+        greet(); //3
+        
+        //CountReset(): count = 0
+        console.countReset("gree")
+        greet(); //1
+        
+        //Group() - organize the console into topics - like a summary
+        console.log("Este é o nível externo");
+        console.group();
+        console.log("Nível 2");
+        console.group();
+        console.log("Nível3");
+        console.warn("Mais uma mensagem no nível 3");
+        console.groupEnd();
+        console.log("Devolta ao nível 2");
+        console.groupEnd();
+        console.log("Devolta ao nível externo");
+        
+        //Trace() - track functions 
+        function funcao1() {
+            funcao2();
+        }
+
+        function funcao2() {
+            funcao3();
+        }
+        
+        function funcao3() {
+            console.trace();
+        }
+
+        funcao1();
+        
+    </script>
+~~~
+
+### JS - Short Circuit <a id="shortcircuit"></a>
+~~~
+    <script>
+
+      function testar() {
+            if (retornaFalse() && retornaTrue()) {
+                console.log("Entrou no IF (&&) - bloco True");
+            } else {
+                console.log("Entrou no IF (&&) - bloco False");
+            }
+
+            //passou False
+            //Entrou no IF (&&) - bloco False  
+
+            if (retornaFalse() & retornaTrue()) {
+                console.log("Entrou no IF (&) - bloco True");
+            } else {
+                console.log("Entrou no IF (&) - bloco False");
+            }
+
+            //passou False
+            //passou True
+            //Entrou no IF (&&) - bloco False 
+
+            if (retornaTrue() || retornaFalse()) {
+                console.log("Entrou no IF (||) - bloco True");
+            } else {
+                console.log("Entrou no IF (||) - bloco False");
+            }
+
+            //passou True
+            //Entrou no IF (&&) - bloco True
+
+            if (retornaTrue() | retornaFalse()) {
+                console.log("Entrou no IF (|) - bloco True");
+            } else {
+                console.log("Entrou no IF (|) - bloco False");
+            }
+
+            //passou False
+            //passou True
+            //Entrou no IF (&&) - bloco True
+
+        function retornaFalse() {
+            console.log("passou False");
+            return false
+        }
+        function retornaTrue() {
+            console.log("Passou True");
+            return true
+        }
+        }
     </script>
 ~~~
