@@ -22,6 +22,9 @@
 - [JS - Matrix](#matrix)
 - [JS - Console](#console)
 - [JS - Short Circuit](#shortcircuit)
+- [JS - Async - Timing](#asynctiming)
+- [JS - Async - API - Buscar CEP - AJAX](#ajaxcep)
+- [JS - Async - API - Buscar CEP - Await](#awaitcep)
 
 ### JS - How to declare variables <a id="declare"></a>
 ~~~
@@ -1490,5 +1493,137 @@
             return true
         }
         }
+
+    </script>
+~~~
+
+### JS - Async - Timing <a id="asynctiming"></a>
+~~~
+       <script>
+
+       //Execute a task in an interval - multiple times
+        var cont = 0 
+        var intId = setInterval(contar, 1000) 
+
+        function contar() {
+            console.log(++cont); // 1 2 3 4 5... (every second)
+        }
+
+        //Execute a task in in one click - set all numbers between 0 and 100 at the same time
+        function tarefaQualquer(){
+            for (let index = 0; index < 100; index++) {
+                console.log("Tarefa: " + index); // 1 2 3 4 5... (same time)
+            }
+        }
+
+        console.log("Primeira Ação");
+        setTimeout(function(){
+                console.log("Segunda Ação");
+        }, 2000)
+        console.log("Terceira Ação");
+
+        // "Primeira Ação"
+        // "Terceira Ação"
+        // "Segunda Ação" - Only shows after 2 seconds
+
+    </script>
+~~~
+
+~~~
+      <script>
+
+        //JS is Assync
+        //Single Thread 
+        //non-blocking I/O
+
+        console.log("Primeira Ação");
+
+        setTimeout(function () {
+            console.log("Segunda Ação");
+        }, 2000)
+
+        console.log("Terceira Ação");
+
+        setTimeout(function () {
+            console.log("Quarta Ação");
+        }, 2000)
+
+        console.log("Quinta Ação");
+
+        // Order:
+        //"Primeira Ação"
+        //"Terceira Ação"
+        //"Quinta Ação"
+        //"Segunda Ação"
+        //"Quarta Ação"
+
+    </script>
+~~~
+
+### JS - Async - API - Buscar CEP - AJAX <a id="ajaxcep"></a>
+
+~~~
+<script>
+
+        var btBuscarCep = document.getElementById("idBtBuscarCep")
+
+        btBuscarCep.onclick = function () {
+            buscarCEP(document.getElementById("idCep").value)
+        }
+
+        //API - Application Programing Interface
+        //Endpoint - URL for web service
+        //Latency - amount of time it takes for a data packet to go from one place to another
+
+        function buscarCEP(cep){
+            //AJAX - HTTPs Request
+            var xhr = new XMLHttpRequest()
+
+            xhr.open("GET", "https://viacep.com.br/ws/" + cep + "/json/" )
+            
+            xhr.addEventListener("load", function(){
+                let resposta = xhr.responseText
+                imprimirEndereco(resposta)
+            })
+            
+            xhr.send()
+        }
+
+        function imprimirEndereco(enderecoJSON){
+            console.log(enderecoJSON)
+
+            let enderecoOBJ = JSON.parse(enderecoJSON) //Convert JSON to JSObject
+
+            console.log(enderecoOBJ);
+
+            console.log("Logradouro " + enderecoOBJ.logradouro);
+
+            let endJSON =  JSON.stringify(enderecoOBJ) //Convert JSObject to JSON
+
+            console.log(endJSON);
+        }
+
+    </script>
+~~~
+
+### JS - Async - API - Buscar CEP - Await <a id="awaitcep"></a>
+
+~~~
+<script>
+
+       var btBuscarCep = document.getElementById("idBtBuscarCep")
+        
+        btBuscarCep.onclick =  async function () {
+            let endereco = await buscarCEP(document.getElementById("idCep").value)
+            console.log(endereco); //return JSON object
+        }
+        
+        async function buscarCEP(cep){
+            
+                var resposta = await fetch("https://viacep.com.br/ws/" + cep + "/json/")
+                //console.log(resposta.json()); - returns promise
+            return resposta.json()
+        }
+        
     </script>
 ~~~

@@ -15,7 +15,9 @@
 - [CSS - Form](#form)
 - [CSS - Grid](#grid)
 - [CSS - Media Queries](#media)
-
+- [CSS - Bootstrap - Form](#bootstrapform)
+- [CSS - Bootstrap - Layout](#bootstraplayout)
+ 
 ### CSS - Inline x External Style Sheet X Internal Style Sheet <a id="cssinline"></a>
 ~~~
 <!DOCTYPE html>
@@ -1132,6 +1134,179 @@
 
     <h1>Titulo 1</h1>
 
+</body>
+</html>
+~~~
+
+### CSS - Bootstrap - Form <a id="bootstrapform"></a>
+
+~~~
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+
+        .geral {
+            display: flex;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="geral">
+        <div>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Default checkbox
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Default checkbox
+                </label>
+            </div>
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                <label class="form-check-label" for="flexCheckIndeterminate">
+                    Indeterminate checkbox
+                </label>
+            </div>
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+            </div>
+
+            <div class="form-check form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" value="" id="reverseCheck1">
+                <label class="form-check-label" for="reverseCheck1">
+                    Reverse checkbox
+                </label>
+            </div>
+
+            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+            <label class="btn btn-primary" for="btn-check">botao simples</label>
+
+            <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
+            <label class="btn btn-primary" for="btn-check-2">selecionado</label>
+
+            <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" disabled>
+            <label class="btn btn-primary" for="btn-check-3">Disabled</label>
+
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+~~~
+
+### CSS - Bootstrap - Layout <a id="bootstraplayout"></a>
+
+~~~
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .my-5{
+            color: red;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container-lg  my-5">
+        <h2>basic grid</h2>
+        <div class="row">
+            <div class="col">
+                <div class="p-5 bg-primary text-light">col 1</div>
+            </div>
+            <div class="col">
+                <div class="p-5 bg-primary text-light">col 2</div>
+            </div>
+            <div class="col">
+                <div class="p-5 bg-primary text-light">col 3</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-lg my-5">
+        <h2>column widths</h2>
+        <div class="row">
+            <div class="col-6">
+                <div class="p-5 bg-primary text-light">col 1</div>
+            </div>
+            <div class="col">
+                <div class="p-5 bg-primary text-light">col 2</div>
+            </div>
+            <div class="col-4">
+                <div class="p-5 bg-primary text-light">col 3</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-lg my-5">
+        <h2>responsive column widths</h2>
+        <div class="row">
+            <div class="col-sm-4 col-lg-6">
+                <div class="p-5 bg-primary text-light">col 1</div>
+            </div>
+            <div class="col-sm-4 col-lg-3">
+                <div class="p-5 bg-primary text-light">col 2</div>
+            </div>
+            <div class="col-sm-4 col-lg-3">
+                <div class="p-5 bg-primary text-light">col 3</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-lg my-5">
+        <h2>justifyng columns</h2>
+        <div class="row justify-content-between">
+            <div class="col-md-3">
+                <div class="p-5 bg-primary text-light">col 1</div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-5 bg-primary text-light">col 2</div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-5 bg-primary text-light">col 3</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
 ~~~
