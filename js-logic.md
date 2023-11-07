@@ -25,6 +25,13 @@
 - [JS - Async - Timing](#asynctiming)
 - [JS - Async - API - Buscar CEP - AJAX](#ajaxcep)
 - [JS - Async - API - Buscar CEP - Await](#awaitcep)
+- [JS - Sets](#sets)
+- [JS - Maps](#maps)
+- [JS -  Stack and Queue](#stackqueue)
+- [JS -  Linked List](#linkedlist)
+- [JS -  Local Storage](#localstorage)
+- [JS -  Session Storage](#sessionstorage)
+- [JS -  API Coins](#apicoins)
 
 ### JS - How to declare variables <a id="declare"></a>
 ~~~
@@ -1625,5 +1632,243 @@
             return resposta.json()
         }
         
+    </script>
+~~~
+
+### JS - Sets <a id="sets"></a>
+
+~~~
+    <script>
+
+        /*
+           Set objects are collections of values. 
+           A value in the set may only occur once; it is unique in the set's collection.
+        */
+
+        //create set
+        let colors = new Set()
+
+        //add elements
+        colors.add("red")
+        colors.add("blue")
+        colors.add("green")
+        colors.add("violet")
+        colors.add("red") //will not be added
+
+        //display set 
+        console.log(colors);
+
+        console.log(colors.has("blue")); //true
+
+        //Remove elements
+        colors.delete("blue")
+
+        //Iterate set
+        for (const color of colors) {
+            console.log(color);
+        }
+
+    </script>
+~~~
+
+### JS - Maps <a id="maps"></a>
+
+~~~
+    <script>
+
+        /*
+            The Map object holds key-value pairs and remembers the original insertion order of the keys. Any value (both objects and primitive values) may be used as either a key or a value.
+        */
+
+        //Create Map
+        let pontuacao = new Map()
+
+        //Add data
+        pontuacao.set("Joao", 90)
+        pontuacao.set("Alberto", 24)
+        pontuacao.set("Joana", 15)
+
+        console.log(pontuacao);
+
+        //Access values
+        console.log(pontuacao.get("Joao")); //90
+
+        //Deleting elements
+        pontuacao.delete("Alberto")
+
+        //Iterate map 
+        for (const [nome, pontos] of pontuacao) {
+            console.log(nome + ": " + pontos);
+        }
+
+    </script>
+~~~
+
+### JS - Stack and Queue <a id="stackqueue"></a>
+
+~~~
+    <script>
+
+        //Stack - LIFO (Last In First Out)
+        let pilha = []
+        pilha.push(1)
+        pilha.push(2)
+        pilha.push(3)
+        pilha.pop() // Remove number 3
+
+
+        //Queue - FIFO (First In First Out)
+        let queue = []
+        queue.push(1)
+        queue.push(2)
+        queue.push(3)
+        queue.shift() //Remove number 1
+
+    </script>
+~~~
+
+### JS - Linked List <a id="linkedlist"></a>
+
+~~~
+   <script>
+
+        /*
+            A linked list is a linear data structure similar to an array. However, unlike arrays, elements are not stored in a particular memory location or index. Rather each element is a separate object that contains a pointer or a link to the next object in that list.
+        */
+
+        class Node {
+            constructor(value){
+                this.value = value;
+                this.next = null;
+            }
+        }
+
+        //Criando a lista encadeada 
+        let head = new Node(1)
+        head.next = new Node(2)
+        head.next.next = new Node(3)
+
+    </script>
+~~~
+
+### JS - Local Storage <a id="localstorage"></a>
+
+~~~
+  <script>
+
+        const inventor = {
+            nome: "Alberto Santos Dummont", 
+            inventos: ["Balão a hélio", "Dirigivel", "Avião"],
+            nacionalidade: "Brasileiro" 
+        } 
+        const inventorJSON = JSON.stringify(inventor)
+
+        //Create localstorage
+        localStorage.setItem("inventor", inventorJSON)
+
+        //Read localstorage
+        const engenheiro = localStorage.getItem("inventor")
+        const JSONToInventor = JSON.parse(engenheiro)
+
+        console.log(JSONToInventor);
+
+        JSONToInventor.inventos.push("14-Bis")
+
+        //Att register
+        localStorage.setItem("inventor", JSONToInventor)
+
+        //Remove register
+        localStorage.removeItem("inventor")
+
+    </script>
+~~~
+
+### JS - Session Storage <a id="sessionstorage"></a>
+
+~~~
+  <script>
+        /*
+            Data is deleted when browser is closed
+        */
+
+        const inventor = {
+            nome: "Alberto Santos Dummont", 
+            inventos: ["Balão a hélio", "Dirigivel", "Avião"],
+            nacionalidade: "Brasileiro" 
+        } 
+        const inventorJSON = JSON.stringify(inventor)
+
+        //Create sessionstorage
+        sessionStorage.setItem("inventor", inventorJSON)
+
+        //Read sessionstorage 
+        const engenheiro = sessionStorage.getItem("inventor")
+        const JSONToInventor = JSON.parse(engenheiro)
+
+        console.log(JSONToInventor);
+
+        JSONToInventor.inventos.push("14-Bis")
+
+        //Att register
+        sessionStorage.setItem("inventor", JSONToInventor)
+
+        //Remove register
+        sessionStorage.removeItem("inventor")
+
+    </script>
+~~~
+
+### JS - API Coins <a id="apicoins"></a>
+
+~~~
+    <script>
+
+        //AJAX
+        function buscarMoedasAJAX() {
+            //AJAX - HTTPs request
+            var xhr = new XMLHttpRequest()
+
+            xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json&$select=simbolo,nomeFormatado,tipoMoeda")
+
+            xhr.addEventListener("load", function () {
+                let resposta = xhr.responseText
+                let moedas = JSON.parse(resposta)
+                //console.log(lMoedas);
+                carregarSelectMoedas(moedas)
+
+            })
+
+            xhr.send()
+        }
+
+         function carregarSelectMoedas(moedas) {
+            //display on screen
+            let listaMoedas = document.getElementById("idMoedas")
+            for (let i = 0; i < moedas.value.length; i++) {
+                console.log(moedas.value[i].simbolo)
+
+                let optionMoeda = document.createElement("option")
+                optionMoeda.value = moedas.value[i].simbolo
+                optionMoeda.innerText = moedas.value[i].nomeFormatado
+
+                listaMoedas.appendChild(optionMoeda)
+            }
+        }
+
+        //Fetch
+        (async function () {
+            let moedas = await buscarMoedasFETCH()
+            console.log(moedas);
+            carregarSelectMoedas(moedas)
+        })()
+
+        async function buscarMoedasFETCH() {
+
+            var resposta = await fetch("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?$top=100&$format=json&$select=simbolo,nomeFormatado,tipoMoeda")
+
+            return resposta.json();
+
+        }
+
     </script>
 ~~~
