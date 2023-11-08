@@ -32,6 +32,9 @@
 - [JS -  Local Storage](#localstorage)
 - [JS -  Session Storage](#sessionstorage)
 - [JS -  API Coins](#apicoins)
+- [JS -  Callback - Basics](#callbasics)
+- [JS -  Callback](#callback)
+
 
 ### JS - How to declare variables <a id="declare"></a>
 ~~~
@@ -1868,6 +1871,79 @@
 
             return resposta.json();
 
+        }
+
+    </script>
+~~~
+
+### JS - Callback - Basics <a id="callbasics"></a>
+
+~~~
+     <script>
+
+        function somar(a, b, funcaoCB) {
+            var res = a + b;
+            funcaoCB(res);
+        }
+
+        function subtrair(a, b, funcaoCB) {
+            var res = a - b;
+            funcaoCB(res);
+        }
+
+        somar(2, 3, function (params) {
+           console.log("Resul: " + params); //Resul: 5
+        });
+
+        console.log(subtrair(8, 2, exibirResultado)); // undefined
+
+        function exibirResultado(resul) {
+            console.log(resul); //6
+        }
+
+    </script>
+~~~
+
+### JS - Callback <a id="callback"></a>
+
+~~~
+      <script>
+
+        //Assync
+        //Single Thread 
+        //IO Non Blocking
+
+        console.log("Primeira Ação");
+
+        buscarCEP("89107000", imprimir);//the time to execute depends to latency
+
+        console.log("Terceira Ação");
+
+        setTimeout(function () {
+            console.log("Quarta Ação");
+        }, 2000)
+
+        console.log("Quinta Ação");
+
+
+        function buscarCEP(cep, funcaoCB){
+            //AJAX - HTTP Request
+           
+            var xhr = new XMLHttpRequest()
+
+            xhr.open("GET", "https://viacep.com.br/ws/" + cep + "/json/" )
+           
+            
+            xhr.addEventListener("load", function(){
+                let resp = xhr.responseText
+                funcaoCB(resp)
+            })
+            
+            xhr.send()
+        }
+
+        function imprimir(end) {
+            console.log(end);
         }
 
     </script>
