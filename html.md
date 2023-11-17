@@ -1,4 +1,4 @@
-## HTML
+![html badge](./assets/html-5.png)
 
 - [HTML Structure](#structure)
 - [HTML Tags](#tags)

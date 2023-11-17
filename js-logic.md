@@ -1,4 +1,4 @@
-## JavaScript - Logic Programming
+![js badge](./assets/js.png)
 
 - [JS - How to declare variables](#declare)
 - [JS - Types of data - Strings, Numbers, Boolean, Object...](#data)

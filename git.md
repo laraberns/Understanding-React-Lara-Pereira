@@ -1,4 +1,4 @@
-## Git
+![git badge](./assets/git.png)
 
 ~~~
 - Software for code version control;
