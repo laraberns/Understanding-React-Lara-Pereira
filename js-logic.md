@@ -34,6 +34,8 @@
 - [JS -  API Coins](#apicoins)
 - [JS -  Callback - Basics](#callbasics)
 - [JS -  Callback](#callback)
+- [JS -  Promisses - Fetch](#promisesfetch)
+- [JS -  Promisses](#promisses)
 
 
 ### JS - How to declare variables <a id="declare"></a>
@@ -1945,6 +1947,97 @@
         function imprimir(end) {
             console.log(end);
         }
+
+    </script>
+~~~
+
+### JS - Promisses - Fetch <a id="promisesfetch"></a>
+
+~~~
+     <script>
+
+        //-- Promisses Fetch
+       
+        fetch("https://viacep.com.br/ws/89107000/json/")
+        .then(function(resposta) { 
+            return resposta.json()
+        })
+        .then(function(responseText){
+            console.log(responseText);
+        })
+        .catch(function(erro){
+            console.log("Erro no buscarCep: " + erro);
+        })
+        .finally(function(){
+            console.log("Esta tarefa sempre será executada"); //even with error this line will display
+        })
+
+    </script>
+~~~
+
+### JS - Promisses <a id="promisses"></a>
+
+~~~
+    <script>
+
+        //Promises have four states:
+        //Pending: When a request has just been made and has not yet brought the result
+        //Fulfilled: When the request result was returned successfully
+        //Rejected: When the request result was returned with “error”
+        //Settled: it is the final state regardless of whether it was carried out or rejected.
+
+        function promiseRealizada() {
+            return Promise.resolve("Promise resolvida")
+        }
+
+        promiseRealizada().then(function (param) {
+            console.log(param);//<---
+        })
+
+
+        function promiseRejeitada() {
+            let erro = {
+                msn: "Erro Http xxx",
+                cod: 500
+            }
+            return Promise.reject(erro)
+        }
+
+        promiseRejeitada().catch(function (erro) {
+            console.log(erro);
+        })
+
+        //-----------------------------------------------------
+
+        function fetch2(url) {
+            return new Promise(function (resolve, reject) {
+                //requisição assincrona... 
+                var xhr = new XMLHttpRequest()
+
+                xhr.open("GET", url)
+
+
+                xhr.addEventListener("load", function () {
+                    let resposta = xhr.responseText
+                    if (resposta) {
+                        resolve(resposta)
+                    }else{
+                        reject("Erro da Requisição")
+                    }  
+                })
+
+                xhr.send()
+
+            })
+        }
+
+        console.log("Inicio do Script");
+
+        fetch2("https://viacep.com.br/ws/89107000/json/").then(function(resolve){
+            console.log(resolve);
+        })
+
+        console.log("Fim do Script");
 
     </script>
 ~~~
