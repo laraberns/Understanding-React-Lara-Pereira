@@ -6,6 +6,7 @@
 - [Node.js - Publishing on NPM](#npmpublish)
 - [Node.js - Express Server](#express)
 - [Node.js - API REST](#rest)
+- [Node.js - Path Names](#pathnames)
 
 ### Node.js - Modules <a id="modules"></a>
 ~~~
@@ -177,33 +178,23 @@ Returns the npm path:
 
 ~~~
 1. Create your account on NPM
-~~~
     https://www.npmjs.com/
-~~~
 
 2. Create a repository on GitHub and clone it to your machine
 
 3. Create a Node project
-~~~
     npm init
-~~~
 
 4. Create your module in index.js
 
 5. While in the project folder, log in to NPM
-~~~
     npm login
-~~~
 
 6. Test if you are really logged in
-~~~
     npm whoami
-~~~
 
 7. Publish the Module 
-~~~
     npm publish
-~~~
 ~~~
 
 ### Node.js - Express Server <a id="express"></a>
@@ -223,7 +214,7 @@ Returns the npm path:
 
     app.use(cors())
     next()
-})
+    })
 
     //ROUTES
     app.get("/", function (req, resp) {
@@ -256,7 +247,7 @@ Returns the npm path:
     )
     })
 
-    //RETURN JSON
+    //ROUTE WITH JSON
     app.get("/livro", function(req, resp){
 
     const livro = {
@@ -362,8 +353,8 @@ Returns the npm path:
 
     </script>
 
-</body>
-</html>
+    </body>
+    </html>
 ~~~
 
 ### Node.js - API REST <a id="rest"></a>
@@ -425,4 +416,36 @@ Returns the npm path:
 
             - https://developer.mozilla.org/en-US/docs/Web/HTTP/Status 
 
+### Node.js - Path Names <a id="pathnames"></a>
+~~~
+
+    ### server.js
+
+    const express = require("express")
+    const path = require("path")
+
+    const app = express()
+
+    app.listen(3001)
+
+    // WHEN 3001 TERMINAL IS OPENED IT WILL DISPLAY THE CONSOLE.LOGS BELOW
+    app.get("/", function(req, resp){
+
+    console.log("__dirname: " + __dirname); 
+    //__dirname: C:\Users\Lara\Desktop\Entra 21 - 2023\006-Node\006-Devolver Paginas Html
+
+    console.log("basename: " + path.basename(__dirname));
+    //basename: 006-Devolver Paginas Html
+
+    console.log("dirname: " + path.dirname(__dirname));
+    //dirname: C:\Users\Lara\Desktop\Entra 21 - 2023\006-Node
+
+    console.log("extname: " + path.extname("index.html"));
+    //extname: .html
+
+    resp.sendFile(path.join(__dirname + "/paginas/index.html"))
+    // WILL DISPLAY WHAT IS ON INDEX.HTML PAGE ON SERVER 3001
+})
+
+~~~
 
