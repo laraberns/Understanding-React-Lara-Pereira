@@ -7,6 +7,9 @@
 - [Node.js - Express Server](#express)
 - [Node.js - API REST](#rest)
 - [Node.js - Path Names](#pathnames)
+- [Node.js - Static Files](#staticfiles)
+- [Node.js - Middlewares](#middlewares)
+- [Node.js - Saving Files](#savingfiles)
 
 ### Node.js - Modules <a id="modules"></a>
 ~~~
@@ -198,163 +201,125 @@ Returns the npm path:
 ~~~
 
 ### Node.js - Express Server <a id="express"></a>
+
 ~~~
-    const express = require("express")
-    const app = express()
-    const conversorJson = require("body-parser")
+
+    // index.js file
+
+    const express = require("express") 
     const cors = require("cors")
 
-    //MIDDLEWARE
-    app.use(conversorJson.urlencoded({extended: false}))
-    app.use(conversorJson.json())
+    const app = express() 
 
-    //HEADER
-    app.use(function(req, resp, next){
-    resp.header("Access-Control-Allow-Origin", "*")
+    //Global Middlewares
+    app.use(express.urlencoded({extended: false})) 
+    app.use(express.json())
 
     app.use(cors())
-    next()
+
+    app.use(function(req, resp, next){
+        resp.setHeader("Access-Control-Allow-Origin", "*")
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-wit")
+        next()
     })
 
-    //ROUTES
     app.get("/", function (req, resp) {
 
-    resp.send(
-        `<html>
-            <head>
-                <meta charset="utf-8">
-            </head>
-            <body>
-                <h1> Olá Pigmeu!!! </h1>
-            </body>
-        </html>
-        ` 
-    )
+        resp.send(
+            `<html>
+                <head>
+                    <meta charset="utf-8">
+                </head>
+                <body>
+                    <h1> Olá Pigmeu!!! </h1>
+                </body>
+            </html>
+            ` 
+        )
     })
 
     app.get("/livros", function(req, resp){
 
-    resp.send(
-        `<html>
-            <head>
-                <meta charset="utf-8">
-            </head>
-            <body>
-                <h1> Listagem de Livros </h1>
-            </body>
-        </html>
-        `   
-    )
+        resp.send(
+            `<html>
+                <head>
+                    <meta charset="utf-8">
+                </head>
+                <body>
+                    <h1> Listagem de Livros </h1>
+                </body>
+            </html>
+            `   
+        )
     })
 
-    //ROUTE WITH JSON
     app.get("/livro", function(req, resp){
 
-    const livro = {
-        "titulo" : "Silencio dos inocentes", 
-        "autor" : "Thomas Harris" 
-    }
+        const livro = {
+            "titulo" : "Silencio dos inocentes", 
+            "autor" : "Thomas Harris" 
+        }
 
-    resp.json(livro)
+        resp.json(livro)
 
     })
 
-
-    //GET ROUTE WITH PARAMS
+    // GET
     app.get("/usuario", function (req, resp) {
-    
-    let nome = req.query.nmNome
-    let cpf = req.query.nmCpf
+        
+        let {nmNome: nome, nmCpf: cpf} = req.query
 
-    console.log("Chegou na rota usuario",  nome, cpf);
-
-    resp.json({
-        "nomeUsu": nome, 
-        "cpfUsu:": cpf
-        })
+        resp.json({
+            "nomeUsu": nome, 
+            "cpfUsu:": cpf
+            })
     })
 
-    //POST ROUTE WITH PARAMS
+    // POST
     app.post("/usuario", function(req, resp){
 
-    let nome = req.body.nmNome
-    let cpf = req.body.nmCpf
+        let {nmNome, nmCpf} = req.body
 
-    resp.json({
-        "nomeUsu": nome, 
-        "cpfUsu:": cpf
-        })
+        resp.json({
+            "nomeUsu": nmNome, 
+            "cpfUsu:": nmCpf
+            })
     })
 
     //DINAMIC ROUTES
     app.get("/ola/:nome/:cargo", function(req, resp){
-    console.log(req.params.nome);
-    console.log(req.params.cargo);
 
-    resp.send("<h1> Ola " + req.params.nome + "</h1>")
+        resp.send("<h1> Ola " + req.params.nome + "</h1>")
     } )
 
+    app.listen(3000)
 
-    //CREATING SERVER WITH EXPRESS
-    app.listen(3001)
- 
 ~~~
 
 ~~~
-    ### FRONT-END - GETTING DATA WITH EXPRESS
+    // index.html file
 
     <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    </head>
-    <body>
-    <form action="" method="">
-        <label for="idNome">Nome:</label><br>
-        <input type="text" name="nmNome" id="idNome"><br>
-        <label for="idCpf">CPF:</label><br>
-        <input type="text" name="nmCpf" id="idCpf"><br><br>
-        <input type="button" value="enviarGet" onclick="requisicaoGet()">
-        <input type="button" value="enviarPost" onclick="requisicaoPost()">
-    </form> 
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Document</title>
+            </head>
+            <body>
+                <form action="http://localhost:3000/usuario" method="post">
 
-    <script>
+                <label for="idNome">Nome:</label><br>
+                <input type="text" name="nmNome" id="idNome"><br>
+                <label for="idCpf">CPF:</label><br>
+                <input type="text" name="nmCpf" id="idCpf"><br><br>
+                <input type="submit">
 
-        //GET
-        async function requisicaoGet() {
+                </form> 
 
-            let nome = document.getElementById("idNome").value
-            let cpf = document.getElementById("idCpf").value
+            </body>
+        </html>
 
-            let resposta = await fetch(`http://localhost:3001/usuario?nmNome=${nome}&nmCpf=${cpf}`)
-            console.log(await resposta.json()) 
-
-        }
-
-        //POST
-        async function requisicaoPost() {
-            let nome = document.getElementById("idNome").value
-            let cpf = document.getElementById("idCpf").value
-
-            var option = {
-                method : "POST", 
-                body: JSON.stringify({
-                    nmNome: nome,
-                    nmCpf: cpf
-                }),
-                headers: {"Content-Type":"application/json" }
-            }
-
-            let resposta = await fetch("http://localhost:3001/usuario", option)
-            console.log(await resposta.json());
-        }
-
-    </script>
-
-    </body>
-    </html>
 ~~~
 
 ### Node.js - API REST <a id="rest"></a>
@@ -449,3 +414,152 @@ Returns the npm path:
 
 ~~~
 
+### Node.js - Static Files <a id="staticfiles"></a>
+~~~
+
+    // index.js
+
+    const express = require("express")
+    const path = require("path")
+
+    const app = express() 
+
+    //Maping static files
+
+   // This Express middleware is used to serve static files. It maps files in the "public" folder to the root of the server. The path.join(__dirname, "public") constructs the full path to the "public" folder from the directory where the script is being executed (__dirname represents the current directory).
+
+    app.use(express.static(path.join(__dirname, "public"))); 
+
+    app.use(express.static(path.join(__dirname, "livros")));
+
+    app.get("/", function (req, resp) {
+        resp.sendFile(__dirname + "/index.html")
+    })
+
+    app.listen(3001)
+
+~~~
+
+~~~
+    //index.html
+
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/estilos.css">
+    </head>
+
+    <body>
+        <div>
+            <h1> Meus Livros Favoritos 3.1 </h1>
+        </div>
+
+        <!-- Front-end is sent by NODE -->
+        <img id="idImagem" src="img/autolah.jpg" alt="" width="15%">
+
+        <!--  Front-end is developed in a project not together with Back-end -->
+        <img id="idImagem" src="http://localhost:3001/img/joinha.jpg" alt="" width="15%">
+
+        <!--  External server --> 
+        <img id="idImagem" src="https://ivan-j-borchardt.github.io/imagens/joinha.jpg" alt="" width="15%">       
+        
+        <!-- Download Link-->
+        <p>baixe o livro <a href="Clean Code.pdf" download>Clean Code</a> aqui</p>
+    </body>
+
+    <!-- JS file -->
+    <script src="js/log.js"></script>
+
+    </html>
+~~~
+
+### Node.js - Middlewares <a id="middlewares"></a>
+~~~
+
+    // index.js
+
+    const express = require("express")
+    const app = express()
+
+    //GLOBAL MIDDLEWARE
+    app.use(function (req, resp, next) {
+        if (req.query.nmUser == "XPTO" && req.query.nmSenha == 1234) {
+            resp.token = {
+                teste: "OK"
+            }
+
+            console.log("Middleware 1");
+
+            next()
+        } 
+
+        resp.status(401).end() 
+
+    })
+
+    //http://localhost:3001/?nmUser=XPTO&nmSenha=1234
+    app.get("/", function (req, resp) {
+        resp.json({msn: "Chegou na rota raiz"})
+    })
+
+
+    //http://localhost:3001/rota1?nmUser=XPTO&nmSenha=1234
+    app.get("/rota1", function (req, resp) {
+        resp.json({msn: "Chegou na rota 1"})
+    })
+
+    //ROUTE MIDDLEWARE
+
+    //http://localhost:3001/usuario?nmUser=XPTO&nmSenha=1234
+    app.get("/usuario", verificarUser ,function (req, resp) {
+
+        resp.json({msn: "Chegou na rota usuario - GET",
+            user: req.query.nmUser, 
+            cod: req.query.nmSenha
+            })
+    })
+
+    function verificarUser(req, resp, next) {
+        if (req.query.nmUser == "XPTO" && req.query.nmSenha == 1234) {
+            resp.token = {
+                teste: "OK"
+            }
+            next()
+        } 
+        resp.status(401).end()  
+    }
+
+
+    app.listen(3001)
+
+~~~
+
+### Node.js - Saving Files <a id="savingfiles"></a>
+~~~
+
+    // index.js
+
+    const fs = require("fs/promises")
+
+    const config = {
+        param1: "Parametro1", 
+        param2: 1234, 
+        param3: "Direita"
+    }
+
+    // save on config.txt -> {"param1":"Parametro1","param2":1234,"param3":"Direita"}
+    salvar(JSON.stringify(config))
+
+    lerArquivo()
+
+    async function salvar(dado) {
+        await fs.writeFile("config.txt", dado)
+    }
+
+    async function lerArquivo() {
+        const dado = await fs.readFile("config.txt", "utf-8")
+
+        console.log(dado); // {"param1":"Parametro1","param2":1234,"param3":"Direita"}
+    }
+
+~~~

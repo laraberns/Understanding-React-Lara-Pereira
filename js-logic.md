@@ -36,6 +36,7 @@
 - [JS -  Callback](#callback)
 - [JS -  Promisses - Fetch](#promisesfetch)
 - [JS -  Promisses](#promisses)
+- [JS -  Destructuring](#destructuring)
 
 
 ### JS - How to declare variables <a id="declare"></a>
@@ -2040,4 +2041,75 @@
         console.log("Fim do Script");
 
     </script>
+~~~
+
+### JS - Destructuring <a id="destructuring"></a>
+
+~~~
+   <script>
+
+       const alfabeto = ["A", "B", "C", "D", "E", "F"]
+       const numbers = [1, 2, 3, 4, 5, 6] 
+
+       //"Breaking" array into variables
+       var [a,, c, ...resto] = alfabeto 
+       
+       console.log(a, c, resto) // A, C ["D","E","F"]
+
+       //Concat two arrays
+       var novoArray = [...alfabeto, ...numbers]
+
+       console.log(novoArray); //['A', 'B', 'C', 'D', 'E', 'F', 1, 2, 3, 4, 5, 6]
+
+       //Desconstructing with default values 
+       function calculos(a, b) {
+            return [a+b, a*b, a/b]
+       }
+
+       var [som, mul, div = "indefinido"] = calculos(2, 5)
+
+       console.log(som, mul, div) // 7 10 0.4
+
+       //Destructuring of Objects 
+       const usuario = {
+            nome : "Alan Turing", 
+            cargo: "Matemático",
+            endereco: {
+                cidade: "london",
+                pais: "Inglaterra"
+            }, 
+            idade: 26
+        }
+
+        const usuario2 = {
+            idade: 31, 
+            filmePredileto: "A bela adormecida"
+        }
+
+        const {nome: nomeUso, cargo = "Programador", idade, ...restante} = usuario
+
+        const {endereco: {cidade}} = usuario
+
+        console.log(nomeUso, cargo, idade, restante) //Alan Turing Matemático 26 endereco{…}
+
+        console.log(cidade) //london
+
+        //Concat two objects
+        const usuario3 = {...usuario, ...usuario2}
+
+        console.log(usuario3) //{nome: 'Alan Turing', cargo: 'Matemático', endereco: {…}, idade: 31, filmePredileto: 'A bela adormecida'}
+
+        //Destructuring with function
+
+        function imprimirUsuario({nome, idade, filmePredileto = "Não Tem"}) {
+            console.log(`Nome: ${nome}. Idade: ${idade}. Filme Predileto: ${filmePredileto}`);
+        }
+
+        imprimirUsuario(usuario) //Nome: Alan Turing. Idade: 26. Filme Predileto: Não Tem
+        imprimirUsuario(usuario3) //Nome: Alan Turing. Idade: 31. Filme Predileto: A bela adormecida
+
+
+
+    </script>
+
 ~~~
