@@ -10,6 +10,7 @@
 - [Node.js - Static Files](#staticfiles)
 - [Node.js - Middlewares](#middlewares)
 - [Node.js - Saving Files](#savingfiles)
+- [Node.js - Environment Vars](#environmentvars)
 
 ### Node.js - Modules <a id="modules"></a>
 ~~~
@@ -45,6 +46,62 @@
 
         console.log(somar(2, 3)); //5
         console.log(subtrair(5, 2)) //3
+
+~~~
+
+~~~
+
+    ### mate.js
+
+    const mult = (a, b) => {
+    return a * b
+    }
+
+    const div = (a, b) => {
+        return a / b
+    }
+
+    module.exports = {
+        mult,
+        div
+    }
+
+~~~
+
+~~~
+
+    ### calculadora.js
+
+    const mate = require("./mate.js")
+
+    console.log(mate.div(6, 3)) //2
+    console.log(mate.mult(2, 4)); //8
+
+~~~
+
+~~~
+
+    ### mate.js
+
+    exports.mult = (a, b) =>{
+    return a * b
+    }
+
+    exports.div = (a, b) => {
+        return a / b 
+    }
+
+
+~~~
+
+~~~
+
+    ### calculadora.js
+
+    const {div, mult} = require("./mate.js")
+
+    console.log(div(6, 3)) //2
+    console.log(mult(2, 4)); //8
 
 ~~~
 
@@ -562,4 +619,25 @@ Returns the npm path:
         console.log(dado); // {"param1":"Parametro1","param2":1234,"param3":"Direita"}
     }
 
+~~~
+
+### Node.js - Environment Vars <a id="environmentvars"></a>
+
+~~~
+
+    ### index.js
+
+    require('dotenv').config({ path: 'index.js' });
+
+    PORTA=3000
+    NOME='Lara'
+
+    // Access PORTA
+    const porta = process.env.PORTA;
+
+    // Access NOME
+    const nome = process.env.NOME;
+
+    console.log(`Porta: ${porta}`); //Porta: 3000
+    console.log(`Nome: ${nome}`); //Nome: Lara
 ~~~
