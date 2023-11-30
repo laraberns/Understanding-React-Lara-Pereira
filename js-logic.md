@@ -37,6 +37,7 @@
 - [JS -  Promisses - Fetch](#promisesfetch)
 - [JS -  Promisses](#promisses)
 - [JS -  Destructuring](#destructuring)
+- [JS -  Dealing with Errors](#errors)
 
 
 ### JS - How to declare variables <a id="declare"></a>
@@ -2112,4 +2113,154 @@
 
     </script>
 
+~~~
+
+### JS - Dealing with Errors <a id="errors"></a>
+~~~
+   <script>
+
+        try {
+            //LOGIC TO BE EXECUTED 
+        } catch (error) {
+            //DEALING WITH ERRORS
+        } finally {
+            //ALWAYS BE EXECUTED
+        }
+
+        /*
+              //Reference error
+              function erroReferencia() {
+                  try {
+                      let x = 3
+                      x = y - 4
+                      
+                  } catch (error) {
+                      alert("Error: " + error) // Y IS NOT DEFINED
+                      console.log(error.name); //ReferenceError
+                      console.log(error.message); //y is not defined
+                      console.log(error.stack); //ReferenceError: y is not defined
+                      //at erroReferencia (index.html:26:17)
+                      //at teste (index.html:42:13)
+                      //at index.html:46:9
+          
+                  }finally{
+                      console.log("Linha abaixo do erro"); //Linha abaixo do erro
+                  }
+                  
+              }
+      
+              function teste() {
+                  erroReferencia()
+              }
+          
+              teste()
+               
+              //Range Error
+              let z = 3
+      
+              try {
+                  z.toPrecision(500)
+              } catch (error) {
+                  console.log(error.name); //RangeError
+                  console.log(error.message); //toPrecision() argument must be between 1 and 100
+                  console.log(error.stack); //RangeError: toPrecision() argument must be between 1 and 100
+                  //at Number.toPrecision (<anonymous>)
+                  //at index.html:54:15
+              }
+              
+              //Sintax Error
+              try {
+                  eval("console.log('dssdsdsds)")
+              } catch (error) {
+                  console.log(error.name); //SyntaxError
+                  console.log(error.message); //Invalid or unexpected token
+                  console.log(error.stack); //SyntaxError: Invalid or unexpected token
+                  //at index.html:65:13
+              }
+      
+              //Type Error
+              let y = 2
+              try {
+                  y.toUpperCase()
+              } catch (error) {
+                  console.log(error.name); //TypeError
+                  console.log(error.message); //y.toUpperCase is not a function
+                  console.log(error.stack); //TypeError: y.toUpperCase is not a function
+                  //at index.html:79:15
+              }
+              
+                //MAKING YOUR OWN ERRORS 
+                try {
+
+                    let isTrue = false
+                    if (!isTrue) {
+                        throw "deu erro no campo xyz..."
+                    }
+
+                } catch (error) {
+                    console.log(error); //deu erro no campo xyz...
+                }
+
+                //CREATING OBJECTS OF ERRORS
+                function UserException(msn) {
+                    this.message = msn
+                    this.name = "UserException"
+                }
+                
+                try {
+                    let isTrue = false
+                    if (!isTrue) {
+                        throw new UserException("O campo Nome não pode ficar em branco!")
+                    }
+        
+                } catch (error) {
+                    console.log(error); //UserException {message: 'O campo Nome não pode ficar em branco!', name: 'UserException'}
+        
+                }
+          
+                //Object Error
+        
+                try {
+        
+                    let isTrue = false
+                    if (!isTrue) {
+                        throw new Error("Erro Personalizado")
+                    }
+                    
+                } catch (error) { //Error Handling 
+                    console.log(error); //Error: Erro Personalizado
+                    console.log(error.name); //Error
+                    console.log(error.message); //Erro Personalizado
+                    console.log(error.stack); //Error: Erro Personalizado at index.html:127:31
+                }
+        */
+        
+                //Error Handling... 
+                try {
+        
+                    let nome = ""
+                    if (nome == "") {
+                        throw new Error("CampoNomeEmBranco")
+                    }
+        
+                    let cpf = ""
+                    if (cpf == "" || cpf == " ") {
+                        throw new Error("CampoCpfEmBranco")
+                    }
+                    
+                } catch (error) {
+                    
+                    if (error.message == "CampoNomeEmBranco") {
+                        alert("Informe seu nome") //Informe seu nome
+                        console.log(error.stack); //Error: CampoNomeEmBranco at index.html:143:31
+                    }
+        
+                    if (error.message == "CampoCpfEmBranco") {
+                        alert("Informe seu CPF")
+                        console.log(error.stack);
+                    }
+        
+                }
+        
+    </script>
 ~~~

@@ -1,6 +1,7 @@
 ![node badge](./assets/node-js.png)
 
-- [Node.js - Modules](#modules)
+- [Node.js - Common Modules](#modules)
+- [Node.js - Es6 Modules](#es6modules)
 - [Node.js - First Server](#firstserver)
 - [Node.js - NPM Command Guide](#commandguide)
 - [Node.js - Publishing on NPM](#npmpublish)
@@ -11,8 +12,9 @@
 - [Node.js - Middlewares](#middlewares)
 - [Node.js - Saving Files](#savingfiles)
 - [Node.js - Environment Vars](#environmentvars)
+- [Node.js - Authentication with JWT](#jwt)
 
-### Node.js - Modules <a id="modules"></a>
+### Node.js - Common Modules <a id="modules"></a>
 ~~~
 
     ### soma.js
@@ -104,6 +106,49 @@
     console.log(mult(2, 4)); //8
 
 ~~~
+
+### Node.js - Es6 Modules <a id="es6modules"></a>
+~~~
+
+    ### SUBTRACAO.JS
+
+    var subtracao = function(a, b){
+        return a - b 
+    }
+
+    export default subtracao
+
+~~~
+
+~~~
+
+    ### MODULOS.JS
+
+    export const getNomeCompleto = (nome, sobreNome) => {
+        return nome + " " + sobreNome;
+    }
+
+    export const getSobrenome = (nome, sobreNome) => {
+        return sobreNome
+    }
+
+~~~
+
+~~~
+
+    ### CALCULADORA.JS
+
+    import subtrair from "./subtracao.js";
+    import { getNomeCompleto, getSobrenome } from "./modulos.js";
+
+    console.log(subtrair(5, 2)) //3
+
+    console.log(getNomeCompleto("Joao", "da Silva")); //Joao da Silva
+    console.log(getSobrenome("Joao", "da Silva")); //da Silva
+    
+~~~
+
+
 
 ### Node.js - First Server <a id="firstserver"></a>
 ~~~
@@ -640,4 +685,57 @@ Returns the npm path:
 
     console.log(`Porta: ${porta}`); //Porta: 3000
     console.log(`Nome: ${nome}`); //Nome: Lara
+~~~
+
+### Node.js - Authentication with JWT <a id="jwt"></a>
+~~~
+
+    import express from "express" //CREATE SERVER
+    import jwt from "jsonwebtoken" //AUTHENTICATION TOKENS
+    const SECRET = process.env.SECRET || "dfghj&%$GHH5/hbj54"
+
+    const app = express()
+    app.use(express.json()) //ANALYZE BODY WITH JSON
+
+    //MIDDLEWARE FOR CHECKING JWT
+    function verificarJWT(req, res, next) {
+        const token = req.header("x-access-token")
+
+        jwt.verify(token, SECRET, function(error, decoded) {
+            if (error) {
+                res.status(401).end()
+            }
+
+            next()
+        })
+        
+    }
+
+    //ROOT ROUTE
+    app.get("/", (req, res)=>{
+        res.status(200).send("Olá")
+    })
+
+    //GENERATE TOKEN IF LOGIN IS CORRECT
+    app.post("/login", (req, res)=>{
+
+        if (req.body.user == "FT012" && req.body.password == "SohEuSei") {
+
+            const token = jwt.sign({userId: 123}, SECRET, {expiresIn: 60})
+
+            res.status(200).json({auth: true, token})
+        } 
+
+        res.status(403).end()
+        
+    })
+
+    //IF TOKEN IS OK, STATUS = 200 AND DISPLAY LISTA DE USUARIOS
+    app.get("/user", verificarJWT,  (req, res)=>{
+        res.status(200).send("Lista de usuarios")
+    })
+
+
+    const PORT = process.env.PORT || 3000
+    app.listen(3000)
 ~~~
