@@ -13,6 +13,8 @@
 - [Node.js - Saving Files](#savingfiles)
 - [Node.js - Environment Vars](#environmentvars)
 - [Node.js - Authentication with JWT](#jwt)
+- [Node.js - API Rest P1](#p1rest)
+- [Node.js - API Rest P2](#p2rest)
 
 ### Node.js - Common Modules <a id="modules"></a>
 ~~~
@@ -738,4 +740,195 @@ Returns the npm path:
 
     const PORT = process.env.PORT || 3000
     app.listen(3000)
+~~~
+
+### Node.js - API Rest P1 <a id="p1rest"></a>
+~~~
+    ### server.js
+
+    import app from "./src/app.js"
+
+    const PORT = process.env.PORT || 3001
+    app.listen(PORT, ()=>{
+        console.log(`Server Rodando em http://localhost:${PORT}`);
+    } )
+~~~
+
+~~~
+    ### src/app.js
+
+    import express from "express"
+
+    const app = express()
+
+    //MIDDLEWARES FOR POST
+    app.use(express.urlencoded({extended:false}))
+    app.use(express.json())
+
+    //Mockup DATABASE
+    const autors = [
+        {id: 1, nome: "Blaise Pascal", ano: 1642, contribuicao: "Pascalina"},
+        {id: 2, nome: "Charles Babbage", ano: 1833, contribuicao: "Engenho analítico"},
+        {id: 3, nome: "Ada Lovelace", ano: 1833, contribuicao: "Bases da lógica de Programação"},
+        {id: 4, nome: "Reynold B. Johnson", ano: 1956, contribuicao: "Disco Rígido"},
+        {id: 5, nome: "Tim Berners Lee", ano: 1956, contribuicao: "World Wide Web"}
+    ] 
+
+    function buscarAutorPorId(id) {
+        return autors.filter(autor => autor.id == id)[0]
+    }
+
+    function buscarIndexAutorPorId(id) {
+        return autors.findIndex(autor => autor.id == id)
+    }
+
+    //Read all authors
+    app.get("/autor", (req, res)=>{
+        //lógica de consulta ao Banco de dados 
+        //autors 
+        res.status(200).send(autors)
+    })
+
+    //Get author
+    app.get("/autor/:id", (req, res)=>{
+        //lógica de consulta ao Banco de dados 
+        //autors 
+        let autor = buscarAutorPorId(req.params.id)
+        res.status(200).json(autor)
+    })
+
+    //Create author
+    app.post("/autor", (req, res)=>{
+        autors.push(req.body)
+        res.status(201).send("Autor cadastrado com sucesso")
+    })
+
+    //Update author
+    app.put("/autor/:id", (req, res)=>{
+        let indexAutor = buscarIndexAutorPorId(req.params.id)
+        autors[indexAutor].nome = req.body.nome
+        autors[indexAutor].ano = req.body.ano
+        autors[indexAutor].contribuicao = req.body.contribuicao
+        res.status(200).json(autors[indexAutor])
+    })
+
+    //Delete author
+    app.delete("/autor/:id", (req, res)=>{
+        let indexAutor = buscarIndexAutorPorId(req.params.id)
+        autors.splice(indexAutor, 1)
+        res.status(200).send(`Autor ${req.params.id} excluído com sucesso!`)
+    })
+
+    //EXPORTING APP
+    export default app 
+~~~
+
+### Node.js - API Rest P2 <a id="p2rest"></a>
+~~~
+    ### server.js
+
+    import app from "./src/app.js"
+
+    const PORT = process.env.PORT || 9000
+    app.listen(PORT, () => console.log(`servidor rodando na ${PORT}`))
+~~~
+
+~~~
+    ### app/app.js
+
+    import express from 'express'
+    import AutorController from './app/controllers/AutorController.js'
+
+    const app = express()
+
+    //middlewares post
+    app.use(express.urlencoded({ extended: false }))
+    app.use(express.json())
+
+    //Read all authors
+    app.get('/autor', AutorController.index)
+
+    //Get author
+    app.get('/autor/:id', AutorController.show)
+
+    //Create author
+    app.post('/autor', AutorController.store)
+
+    //Update author
+    app.delete("/autor/:id", AutorController.delete)
+
+    //Delete author
+    app.put("/autor/:id", AutorController.update)
+
+    export default app
+~~~
+
+~~~
+    ### app/database/conexao.js
+
+    //mockup
+    const autores = [
+        { id: 1, nome: "Blaise", ano: 1642, contribuicao: "Pascalina" },
+        { id: 2, nome: "Charles", ano: 1833, contribuicao: "Engenho analítico" }
+    ]
+
+    function buscaAutorId(id) {
+        return autores.filter((autor) => autor.id == id)[0]
+    }
+
+    function buscarIndexAutorId(id) {
+        return autores.findIndex((autor) => autor.id == id)
+    }
+
+    function getAutores(){
+        return autores
+    }
+
+    export {
+        buscaAutorId,
+        buscarIndexAutorId,
+        getAutores
+    }
+~~~
+
+~~~
+    ### app/controllers/AutorController.js
+
+    import { buscaAutorId, buscarIndexAutorId, getAutores } from "../database/conexao.js"
+
+    let autores = getAutores()
+
+    class AutorController {
+        index(req, res) {
+            res.status(200).send(autores)
+        }
+
+        show(req, res) {
+            let autor = buscaAutorId(req.params.id)
+            console.log(autor);
+            res.status(200).json(autor)
+        }
+
+        store(req, res) {
+            autores.push(req.body)
+            res.status(201).send("Autor cadastrado")
+        }
+
+        update(req, res) {
+            let indexAutor = buscarIndexAutorId(req.params.id)
+            autores[indexAutor].nome = req.body.nome
+            autores[indexAutor].ano = req.body.ano
+            autores[indexAutor].contribuicao = req.body.contribuicao
+            res.status(200).end()
+        }
+
+        delete(req, res) {
+            let indexAutor = buscarIndexAutorId(req.params.id)
+            autores.splice(indexAutor, 1)
+            res.status(200).json("Autor deletado")
+        }
+    }
+
+    // Singleton (Design Patterns)
+    export default new AutorController
 ~~~
