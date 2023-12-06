@@ -15,6 +15,8 @@
 - [Node.js - Authentication with JWT](#jwt)
 - [Node.js - API Rest P1](#p1rest)
 - [Node.js - API Rest P2](#p2rest)
+- [Node.js - API Rest P3](#p3rest)
+- [Node.js - API Rest P4](#p4rest)
 
 ### Node.js - Common Modules <a id="modules"></a>
 ~~~
@@ -931,4 +933,191 @@ Returns the npm path:
 
     // Singleton (Design Patterns)
     export default new AutorController
+~~~
+
+### Node.js - API Rest P3 <a id="p3rest"></a>
+
+~~~
+    ### server.js
+
+    import app from "./src/app.js"
+
+    app.listen(9000, ()=>{
+        console.log(`Server Rodando`);
+    } )
+~~~
+
+~~~
+    ### .src/app/controllers/AutorController.js
+
+        import AutorRepository from "../repositories/AutorRepository.js"
+
+        class AutorController{
+
+
+        index(req, res){
+            res.status(200).send(AutorRepository.findAll())
+        }
+
+        show(req, res){
+            res.status(200).json(AutorRepository.findById(req.params.id))
+        }
+
+        store(req, res){
+            AutorRepository.create(req.body)
+            res.status(201).send("Autor cadastrado com sucesso")
+        }
+
+        update(req, res){
+            res.status(200).json(AutorRepository.update(req.params.id, req.body))
+        }
+
+
+        delete(req, res){
+            AutorRepository.delete(req.params.id)
+            res.status(200).send(`Autor ${req.params.id} excluído com sucesso!`)
+        }
+
+
+        }
+
+        export default new AutorController
+~~~
+
+~~~
+    ### .src/app/database/conexao.js
+
+    const autors = [
+        {id: 1, nome: "Blaise Pascal", ano: 1642, contribuicao: "Pascalina"},
+        {id: 2, nome: "Charles Babbage", ano: 1833, contribuicao: "Engenho analítico"},
+        {id: 3, nome: "Ada Lovelace", ano: 1833, contribuicao: "Bases da lógica de Programação"},
+        {id: 4, nome: "Reynold B. Johnson", ano: 1956, contribuicao: "Disco Rígido"},
+        {id: 5, nome: "Tim Berners Lee", ano: 1956, contribuicao: "World Wide Web"}
+    ] 
+
+    function buscarAutorPorId(id) {
+        return autors.filter(autor => autor.id == id)[0]
+    }
+
+    function buscarIndexAutorPorId(id) {
+        return autors.findIndex(autor => autor.id == id)
+    }
+
+    function getAutors() {
+        return autors
+    }
+
+    export {buscarAutorPorId, buscarIndexAutorPorId, getAutors}
+~~~
+
+~~~
+    ### .src/app/repositories/AutorRepository.js
+
+        import {buscarAutorPorId, buscarIndexAutorPorId, getAutors} from "../database/conexao.js"
+
+    class AutorRepository{
+        findAll(){
+            return getAutors()
+        }
+
+        findById(id){
+            return buscarAutorPorId(id)
+        }
+
+        create(autor){
+            getAutors().push(autor)
+        }
+
+        update(id, autor){
+            let indexAutor = buscarIndexAutorPorId(id)
+            let autors = getAutors()
+            autors[indexAutor].nome = autor.nome
+            autors[indexAutor].ano = autor.ano
+            autors[indexAutor].contribuicao = autor.contribuicao
+
+            return autors[indexAutor]
+        }
+
+        delete(id, autor){
+            let indexAutor = buscarIndexAutorPorId(id)
+            getAutors().splice(indexAutor, 1)
+        }
+    }
+
+    export default new AutorRepository()
+~~~
+
+~~~
+ ### .src/app/app.js
+
+    import express from "express"
+    import AutorController from "./app/controllers/AutorController.js"
+
+    const app = express()
+
+    //MIDDLEWARES
+    app.use(express.urlencoded({extended:false}))
+    app.use(express.json())
+
+
+    //Read
+    app.get("/autor", AutorController.index)
+    app.get("/autor/:id", AutorController.show)
+
+    //Create
+    app.post("/autor", AutorController.store)
+
+    //Update
+    app.put("/autor/:id", AutorController.update)
+
+    //Delete
+    app.delete("/autor/:id", AutorController.delete)
+
+    export default app 
+~~~
+
+### Node.js - API Rest P3 <a id="p3rest"></a>
+
+~~~
+### THE ONLY THING BETWEEN P3 AND P4 THAT CHANGES IS THE CREATION OF ROUTES.JS
+
+    ### app/routes.js
+
+        import { Router } from "express";
+        import AutorController from "./app/controllers/AutorController.js"
+
+        const router = Router()
+
+        //Read
+        router.get("/autor", AutorController.index)
+        router.get("/autor/:id", AutorController.show)
+
+        //Create
+        router.post("/autor", AutorController.store)
+
+        //Update
+        router.put("/autor/:id", AutorController.update)
+
+        //Delete
+        router.delete("/autor/:id", AutorController.delete)
+
+        export default router
+~~~
+
+~~~
+
+    ### app/app.js
+
+        import express from "express"
+        import router from "./routes.js"
+
+        const app = express()
+
+        //MIDDLEWARES
+        app.use(express.urlencoded({extended:false}))
+        app.use(express.json())
+
+        app.use(router)
+
+        export default app 
 ~~~
