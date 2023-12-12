@@ -17,7 +17,9 @@
 - [Node.js - API Rest P2](#p2rest)
 - [Node.js - API Rest P3](#p3rest)
 - [Node.js - API Rest P4](#p4rest)
+- [Node.js - API Rest P5](#p5rest)
 - [Node.js - HTTPs HTTP2](#https)
+- [Node.js - Testing with JEST](#jest)
 
 ### Node.js - Common Modules <a id="modules"></a>
 ~~~
@@ -955,7 +957,6 @@ Returns the npm path:
 
         class AutorController{
 
-
         index(req, res){
             res.status(200).send(AutorRepository.findAll())
         }
@@ -973,13 +974,10 @@ Returns the npm path:
             res.status(200).json(AutorRepository.update(req.params.id, req.body))
         }
 
-
         delete(req, res){
             AutorRepository.delete(req.params.id)
             res.status(200).send(`Autor ${req.params.id} excluído com sucesso!`)
         }
-
-
         }
 
         export default new AutorController
@@ -1060,7 +1058,6 @@ Returns the npm path:
     app.use(express.urlencoded({extended:false}))
     app.use(express.json())
 
-
     //Read
     app.get("/autor", AutorController.index)
     app.get("/autor/:id", AutorController.show)
@@ -1077,7 +1074,7 @@ Returns the npm path:
     export default app 
 ~~~
 
-### Node.js - API Rest P3 <a id="p3rest"></a>
+### Node.js - API Rest P4 <a id="p4rest"></a>
 
 ~~~
 ### THE ONLY THING BETWEEN P3 AND P4 THAT CHANGES IS THE CREATION OF ROUTES.JS
@@ -1121,6 +1118,33 @@ Returns the npm path:
         app.use(router)
 
         export default app 
+~~~
+
+### Node.js - API Rest P5 <a id="p5rest"></a>
+
+~~~
+    ### THE ONLY THING BETWEEN P4 AND P5 THAT CHANGES IS THE SERVER
+
+    //server.js
+
+    import app from "./src/app.js"
+    import https from "https"
+    import fs from "fs"
+
+    const server = https.createServer({
+        key:  fs.readFileSync("privatekey.pem", "utf-8"),
+        cert: fs.readFileSync("certificate.pem", "utf-8")
+    }, app)
+
+    const PORT_HTTPS = 3000
+    server.listen(PORT_HTTPS, ()=>{
+        console.log(`Server Rodando em https://localhost:${PORT_HTTPS}`);
+    } )
+
+    const PORT =  3001
+    app.listen(PORT, ()=>{
+        console.log(`Server Rodando em http://localhost:${PORT}`);
+    } )
 ~~~
 
 ### Node.js - HTTPs HTTP2 <a id="https"></a>
@@ -1237,5 +1261,259 @@ Returns the npm path:
     const PORT = process.env.PORT || 3002
     server.listen(PORT, ()=>{
         console.log(`Servidor rodando em https://localhost:${PORT}`);
+    })
+~~~
+
+### Node.js - Testing with JEST <a id="jest"></a>
+
+~~~
+    # Automated Tests
+    ## Unit Tests
+    ## Integration Tests
+
+    ## JEST
+
+    - 1. Jest Installation 
+        npm install --save-dev jest  
+
+
+    - 2. Jest Configuration
+    - jest.config.json: 
+    ~~~JavaScript
+    {
+        "testEnvironment" : "node",
+        "testMatch" : ["**/__tests__/**/*.js?(x)", "**/?(*.)+(spec|test).js?(x)"],
+        "transform": {} 
+    }
+    ~~~
+
+    ----OR-----
+
+    - jest.config.js: 
+    ~~~JavaScript
+    module.exports = {
+        testEnvironment: "node", 
+        testMatch: ["**/__tests__/**/*.js?(x)", "**/?(*.)+(spec|test).js?(x)"]
+    }
+    ~~~
+
+    - Test script in package.json:
+    ~~~JSON
+    "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    }
+    ~~~
+
+    - 3. Create the "test" folder and the mode.spec.js file
+
+    - 4. Write the first test
+    ~~~JavaScript
+
+    /**
+    *  Jest Functions:
+    * - describe   : Test block (test Suites)
+    * - it or test : Declare a single unit test (test cases)
+    * - expect     : Validate results (result assertion) 
+    */
+
+        describe("Example Tests", () => {
+            test("given 1 and 2, the expected result is 3", () => {
+                expect(1 + 2).toEqual(3);
+        });
+        });
+    ~~~
+
+    - 5. Server Routes Testing 
+        npm i --save-dev supertest
+
+    - 6. Testing 
+        npm test
+~~~
+
+~~~
+    //server.js
+
+    import app from "./src/app.js"
+
+    const PORT = process.env.PORT || 3000
+    app.listen(PORT, ()=>{
+        console.log(`Server rodando em http://localhost:${PORT}`);
+})
+~~~
+
+~~~
+    //server.js
+
+    import app from "./src/app.js"
+
+    const PORT = process.env.PORT || 3000
+    app.listen(PORT, ()=>{
+        console.log(`Server rodando em http://localhost:${PORT}`);
+})
+~~~
+
+~~~
+    //jest.config.json
+
+    {
+    "testEnvironment" : "node",
+    "testMatch" : ["**/__tests__/**/*.js?(x)", "**/?(*.)+(spec|test).js?(x)"], 
+    "transform": {}
+    }
+~~~
+
+~~~
+    //src/Calculadora.js
+    
+    class Calculadora{
+
+    soma(a, b){
+        return a + b
+    }
+
+    sub(a, b){
+        return a - b
+    }
+
+    div(a, b){
+        if(b === 0){
+            throw new Error("Divisao por zero")
+        }
+        return a / b
+    }
+    }
+
+    export default Calculadora
+~~~
+
+~~~
+    //src/Textos.js
+    
+    class Textos{
+
+    concatenar(stringA, stringB){
+        return stringA + stringB
+    }
+
+    }
+
+    export default Textos
+~~~
+
+~~~
+    //src/App.js
+    
+    import express from "express"
+
+    const app = express()
+    app.use(express.json())
+
+    app.get("/user", (req, res)=>{
+        res.status(200).json({msn:"Ola"})
+    })
+
+    app.post("/user", (req, res)=>{
+        res.status(201).json({id: req.body.id, nome: req.body.nome})
+    })
+
+    app.delete("/user", (req, res)=>{
+        res.status(200).json({msn:"User deletado com sucesso"})
+    })
+
+    app.put("/user", (req, res)=>{
+        res.status(200).json({id: req.body.id, nome: req.body.nome})
+    })
+
+    export default app
+~~~
+
+~~~
+    //test/Calculadora.spec.js
+    
+    import Calculadora from "../src/Calculadora.js"
+
+    describe("Testes Calculadora.js", ()=>{
+    it("Funcao soma(a, b) - dado a = 1, b = 2, o resultado esperado eh 3", ()=>{
+        let calc = new Calculadora()
+        let resul = calc.soma(1, 2)
+        expect(resul).toEqual(3)
+        expect(typeof(resul)).toEqual("number")
+    })
+
+    test("Funcao sub(a, b) - dado a = 1, b = 2, o resultado esperado eh -1", ()=>{
+        let calc = new Calculadora()
+        expect(calc.sub(1, 2)).toEqual(-1)
+    })
+
+    test("Funcao div(a, b) - dado a = 3 e b= 2, o resultado esperado eh 1.5", ()=>{
+        let calc = new Calculadora()
+        expect(calc.div(3, 2)).toBe(1.5)
+    })
+
+    test("Funcao div(a, b) - dado a = 3 e b= 0,  é esperado que lance o Erro 'Divisão por Zero'", ()=>{
+        let calc = new Calculadora()
+        expect(()=>{
+            calc.div(3, 0)
+        }).toThrow()
+    })
+
+    })  
+~~~
+
+~~~
+   //test/Textos.spec.js
+    
+    import Textos from "../src/Textos.Js" 
+
+    describe("Textos.js", ()=>{
+    test("Funcao Concatenar(a, b), dado a='AB' e b= 'BC', o resultado esperado é 'ABBC'", ()=>{
+        let text = new Textos()
+        expect(text.concatenar("AB", "BC")).toBe("ABBC")
+    })
+    })
+~~~
+
+~~~
+   //test/Textos.spec.js
+    
+    import supertest from "supertest"
+    import app from "../src/app.js"
+
+    const request = supertest(app)
+
+    describe("app.js", ()=>{
+    test("Deveria retornar Ola e Status 200", async ()=>{
+        let res = await request.get("/user")
+
+        
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toHaveProperty("msn")
+        expect(res.body.msn).toEqual("Ola")
+    })
+
+    test("Deveria retornar os dados id e nome enviados na requisicao e Status 201", async ()=>{
+        let res = await request.post("/user").send({"id": 23, "nome": "Steve Jobs"})
+        expect(res.statusCode).toEqual(201)
+        expect(res.body).toHaveProperty("id")
+        expect(res.body).toHaveProperty("nome")
+        expect(res.body.id).toEqual(23)
+        expect(res.body.nome).toEqual("Steve Jobs")
+    })
+
+    test("Deveria retornar 'User deletado com sucesso' e Status 200", async ()=>{
+        let res = await request.delete("/user")
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toHaveProperty("msn")
+        expect(res.body.msn).toEqual("User deletado com sucesso")
+    })
+
+    test("Deveria retornar os dados id e nome enviados na requisicao e Status 201", async ()=>{
+        let res = await request.put("/user").send({"id": 23, "nome": "Steve Jobs"})
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toHaveProperty("id")
+        expect(res.body).toHaveProperty("nome")
+        expect(res.body.id).toEqual(23)
+        expect(res.body.nome).toEqual("Steve Jobs")
+    })
     })
 ~~~
