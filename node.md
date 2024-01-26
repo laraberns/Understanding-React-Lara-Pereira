@@ -20,6 +20,7 @@
 - [Node.js - API Rest P5](#p5rest)
 - [Node.js - HTTPs HTTP2](#https)
 - [Node.js - Testing with JEST](#jest)
+- [Node.js - Connecting with DB PostgreSQL](#postgresql)
 
 ### Node.js - Common Modules <a id="modules"></a>
 ~~~
@@ -1516,4 +1517,133 @@ Returns the npm path:
         expect(res.body.nome).toEqual("Steve Jobs")
     })
     })
+~~~
+
+### Node.js - Connecting with DB PostgreSQL <a id="postgresql"></a>
+
+~~~
+const path = require("path")
+const {Pool} = require("pg")
+const env = require("dotenv")
+
+// Configures environment variables using the .env file located at the specified path.
+env.config({
+    overide: true,
+    path: path.join(__dirname, "conexao.env")
+})
+
+// Defines an object (dadosConexao) with PostgreSQL connection parameters taken from environment variables.
+const dadosConexao = {
+    user: process.env.USER,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
+    port: process.env.PORT
+}
+
+// Creates a PostgreSQL client pool using the previously defined connection parameters.
+const pool = new Pool(dadosConexao)
+
+// Inserts a new row into the corretor table and returns the inserted data.
+async function salvarCorretor(id, nome, licenca, telefone){
+    const client =  await pool.connect()
+
+    try {
+        const text = `insert into corretor values($1, $2, $3, $4) returning *`
+        const values = [id, nome, licenca, telefone]
+        const rows = await client.query(text, values)
+
+        console.log(rows.rows)
+        
+    } catch (error) {
+       console.log(error)
+    } finally {
+        client.release()
+    }
+}
+
+salvarCorretor(8, 'Ivan Borchardt', 'LHC334', '479977887')
+
+// Deletes a row from the corretor table based on the provided ID and returns the deleted data.
+async function deletarCorretor(id){
+    const client =  await pool.connect()
+
+    try {
+
+        const text = `delete from corretor where codcorr = $1 returning *`
+        const values = [id]
+        const rows = await client.query(text, values)
+
+        console.log(rows.rows)
+        
+    } catch (error) {
+       console.log(error)
+    } finally {
+        client.release()
+    }
+}
+
+deletarCorretor(6)
+
+// Updates the data of an existing row in the corretor table and returns the updated data.
+async function alterarCorretor(id, nome, licenca, telefone){
+    const client =  await pool.connect()
+
+    try {
+
+        const text = `update corretor set nome = $2, licenca = $3, telefone = $4 where codcorr = $1 returning *`
+        const values = [id, nome, licenca, telefone]
+        const rows = await client.query(text, values)
+
+        console.log(rows.rows)
+        
+    } catch (error) {
+       console.log(error)
+    } finally {
+        client.release()
+    }
+}
+
+alterarCorretor(8, 'Ivan J. Borchardt', 'LHC000', '47000000')
+
+// Retrieves all rows from the corretor_sem_telefone view and logs the result.
+async function buscarCorretores(){
+    const client =  await pool.connect()
+
+    try {
+
+        const text = `select * from corretor_sem_telefone`
+        const rows = await client.query(text)
+
+        console.log(rows.rows)
+        
+    } catch (error) {
+       console.log(error)
+    } finally {
+        client.release()
+    }
+}
+
+buscarCorretores()
+
+// Retrieves a specific row from the corretor table based on the provided ID and logs the result.
+async function buscarCorretoresPorId(id){
+    const client =  await pool.connect()
+
+    try {
+
+        const text = `select * from corretor where codcorr = $1`
+        const values = [id]
+        const rows = await client.query(text, values)
+
+        console.log(rows.rows)
+        
+    } catch (error) {
+       console.log(error)
+    } finally {
+        client.release()
+    }
+}
+
+buscarCorretoresPorId(5)
 ~~~
