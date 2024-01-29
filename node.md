@@ -18,6 +18,7 @@
 - [Node.js - API Rest P3](#p3rest)
 - [Node.js - API Rest P4](#p4rest)
 - [Node.js - API Rest P5](#p5rest)
+- [Node.js - API Rest P6](#p6rest)
 - [Node.js - HTTPs HTTP2](#https)
 - [Node.js - Testing with JEST](#jest)
 - [Node.js - Connecting with DB PostgreSQL](#postgresql)
@@ -1147,6 +1148,196 @@ Returns the npm path:
         console.log(`Server Rodando em http://localhost:${PORT}`);
     } )
 ~~~
+
+### Node.js - API Rest P6 <a id="p6rest"></a>
+~~~
+
+// server.js
+
+    import app from "./src/app.js"
+    import https from "https"
+    import fs from "fs"
+
+    const server = https.createServer({
+        key:  fs.readFileSync("privatekey.pem", "utf-8"),
+        cert: fs.readFileSync("certificate.pem", "utf-8")
+    }, app)
+
+
+    //https server
+    const PORT_HTTPS = process.env.PORT_HTTPS || 3000
+    server.listen(PORT_HTTPS, ()=>{
+        console.log(`Server Rodando em https://localhost:${PORT_HTTPS}`);
+    } )
+
+    //http server
+    const PORT = process.env.PORT_HTTP || 3001
+    app.listen(PORT, ()=>{
+        console.log(`Server Rodando em http://localhost:${PORT}`);
+} )
+
+// app.js
+
+    import express from "express"
+    import routes from "./routes.js"
+
+    const app = express()
+
+    app.use(express.urlencoded({extended:false}))
+    app.use(express.json())
+
+    app.use(routes)
+
+    export default app 
+
+// routes.js
+
+    import { Router } from "express";
+    import AutorController from "./app/controllers/AutorController.js"
+
+    const router = Router()
+
+    //Read All
+    router.get("/autor", AutorController.index)
+
+    // Read one author by Id
+    router.get("/autor/:id", AutorController.show)
+
+    //Create author
+    router.post("/autor", AutorController.store)
+
+    //Update author
+    router.put("/autor/:id", AutorController.update)
+
+    //Delete author
+    router.delete("/autor/:id", AutorController.delete)
+
+    export default router
+
+// AutorController.js
+
+    import AutorRepository from "../repositories/AutorRepository.js"
+
+    class AutorController{
+
+        // Show All authors
+        async index(req, res){
+            let autor = await AutorRepository.findAll() 
+            res.status(200).send(autor)
+        }
+
+        // Show by Id
+        async show(req, res){
+            let autor = await AutorRepository.findById(req.params.id)
+            res.status(200).json(autor)
+        }
+
+        // Create author
+        async store(req, res){
+            let status = await AutorRepository.create(req.body)
+            res.status(201).send(status)
+        }
+
+        // Update author
+        async update(req, res){
+            let autor = await AutorRepository.update(req.params.id, req.body)
+            res.status(200).json(autor)
+        }
+
+        // Delete author
+        async delete(req, res){
+            let autor = await AutorRepository.delete(req.params.id)
+            res.status(200).send(autor)
+        }
+    }
+
+    export default new AutorController
+
+// AutorRepository.js 
+
+import {consulta} from "../database/conexao.js"
+
+    class AutorRepository{
+
+        //CRUD
+        create(autor){
+            const sql = 'insert into autor(nome, ano, contribuicao) values ($1, $2, $3) returning *'
+            const valores = [autor.nome, autor.ano, autor.contribuicao]
+            return consulta(sql, valores, "Erro ao cadastrar Autor!")
+        }
+        
+        findAll(){
+            const sql = 'select * from autor'
+            const valores = []
+            return consulta(sql, valores, "Erro ao buscar Autor!")
+        }
+        
+        findById(id){
+            const sql = 'select * from autor where id = $1'
+            const valores = [id]
+            return consulta(sql, valores, "Erro ao buscar Autor por Id!")
+        }
+        
+        update(id, autor){
+            const sql = 'update autor set nome = $2, ano = $3, contribuicao = $4 where id = $1 returning *'
+            const valores = [id, autor.nome, autor.ano, autor.contribuicao]
+            return consulta(sql, valores, "Erro ao alterar Autor por Id!")
+        }
+
+        
+        delete(id){
+            const sql = 'delete from autor where id = $1 returning *'
+            const valores = [id]
+            return consulta(sql, valores, "Erro ao deletar Autor por Id!")
+        }
+    }
+
+    export default new AutorRepository()
+
+// conexao.js 
+
+    import path from 'path'
+    import { fileURLToPath } from 'url'
+    import pg from 'pg'
+    import {config} from 'dotenv'
+
+    const {Pool} = pg
+
+    const __filename = fileURLToPath(import.meta.url)
+    const __dirname = path.dirname(__filename)
+
+    config({
+        overide: true, 
+        path:  path.join(__dirname, "conexao.env") 
+    })
+
+    const dadosConexao = {
+        user: process.env.USER,
+        host: process.env.HOST,
+        database: process.env.DATABASE,
+        password: process.env.PASSWORD,
+        port: process.env.PORT
+    }
+
+    const pool = new Pool(dadosConexao)
+    var client
+    (async function(){
+        client =  await pool.connect()
+    })()
+
+    export const consulta = (sql, valores, msnErro)=>{
+        return new Promise(function(resolve, reject){
+            client.query(sql, valores, function(erro, resul){
+                if (erro) {
+                    return reject(msnErro + " " + erro)
+                }
+                return resolve(resul.rows)
+            })
+        })
+    }
+
+    ~~~
+
 
 ### Node.js - HTTPs HTTP2 <a id="https"></a>
 
