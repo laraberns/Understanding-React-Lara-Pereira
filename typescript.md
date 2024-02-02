@@ -3,6 +3,8 @@
 # TypeScript
 
 - [TS - First TS File](#firstts)
+- [TS - Class](#class)
+- [TS - POO](#poo)
 
 ## What is TypeScript 
 
@@ -227,3 +229,176 @@
     exibirItensArray(x4); // {ax1: "saasd", ax2:3434}, {ax1: "saasd", ax2:3434}, {ax1: "saasd", ax2:3434}
 
 ~~~
+
+### TS - Class <a id="class"></a>
+~~~
+
+// index.ts
+
+    //Class
+    class Pessoa {
+        
+        //Atributes
+        nome: string;
+        idade?: number; 
+        cpf?: string; 
+
+        //Methods - Functions
+        //Construtor 
+        constructor(nome: string, idade?: number, cpf?: string){
+            this.nome = nome; 
+            this.idade = idade;
+            this.cpf = cpf; 
+        }
+
+        //Worker Method
+        mostrarNomeUsuario(tipoUser: string):void{
+            console.log(`O Nome do Usuário é ${this.nome} tipo: ${tipoUser}`);
+        }
+    }
+
+    let pessoa = new Pessoa("Joao", 23, "0004.0009.333-23")
+    let pessoa2 = new Pessoa("Evandro", 21)
+
+    console.log(pessoa.nome); //Joao
+
+    pessoa.nome = "Joana"
+
+    console.log(pessoa.nome); //Joana
+
+    console.log(pessoa); //Pessoa {nome: "Joana", idade: 23, cpf: "0004.0009.333-23"}
+
+    console.log(pessoa2.mostrarNomeUsuario("DBA")); //O Nome do Usuário é Evandro tipo: DBA
+~~~
+
+### TS - POO <a id="poo"></a>
+~~~
+// app.ts
+
+    import { Cliente } from "./Cliente"
+    import {ContaCorrente} from "./ContaCorrente"
+
+    let cliente = new Cliente("William", "009.008.007-23", new ContaCorrente("203-0", 500.00, 200))
+
+    console.log("Operação Depósito:" + cliente.getConta().deposito(300)); //000 - Op. Depósito realizado com sucesso!
+~~~
+
+~~~
+// Cliente.ts
+
+    import { ContaCorrente } from "./ContaCorrente"
+
+    export class Cliente{
+
+            private nome: string 
+            private cpf: string
+            private conta: ContaCorrente
+
+            constructor (nome: string, cpf: string, conta: ContaCorrente){
+                this.nome = nome
+                this.cpf = cpf
+                this.conta = conta
+            }
+
+            public getNome():string{
+                return this.nome
+            }
+
+            public getCpf():string{
+                return this.cpf
+            }
+
+            public getConta():ContaCorrente{
+                return this.conta
+            } 
+
+            public setNome(nome:string){
+                this.nome = nome
+            }
+
+            public setCpf(cpf:string){
+                this.cpf = cpf
+            }
+
+            public setConta(conta:ContaCorrente){
+                this.conta = conta
+            }
+        }
+~~~
+
+~~~
+// ContaCorrente.ts
+
+    export class ContaCorrente{
+        //Access modificators => public, private, protected, readonly 
+        private  numCC: string
+        private  saldo: number = 0 
+        private limite: number = 0
+        private senha: number
+
+        constructor(numCC: string, senha: number, saldo?:number, limite?:number){
+            this.numCC = numCC
+            this.senha = senha
+            if (saldo) {
+                if (saldo > 0) {
+                    this.saldo = saldo
+                }
+            }
+            
+            if (limite) {
+                if (limite > 0) {
+                    this.limite = limite
+                }
+            }
+        }
+
+        //Getter 
+        public getSaldo():number{
+            return this.saldo
+        }
+
+        public getLimite():number{
+            return this.limite
+        }
+
+        public getSenha():number{
+            return this.senha
+        }
+
+        //Setter 
+        public setLimite(limite:number):string{
+            if (limite > (this.limite * 1.2)) {
+                return "Novo limite acima de 20%, operação negada"
+            }else if(limite < 0){
+                return "Novo limite inferior a ZERO, operação negada"
+            }else{
+                this.limite = limite
+                return "Novo limite " + this.limite
+            }
+        }
+
+        public setSenha(senha:number):string{
+            this.senha = senha
+            return "000 - Nova senha cadastrada com sucesso!"
+        }
+
+        //Métodos Worker 
+        public deposito(valorDeposito:number):string{
+            if (valorDeposito > 0 ){
+                this.saldo = this.saldo + valorDeposito
+                return "000 - Op. Depósito realizado com sucesso!"
+            }
+            return "005 - Valor de depósito inválido"
+        }
+
+        public saque(valorSaque:number):string{
+            if ((this.saldo + this.limite) >= valorSaque){
+                this.saldo = this.saldo - valorSaque
+                return "000 - Saque Efetuado com sucesso!"
+            } else {
+                return "006 - Saldo Insuficiente!"
+            }
+        }
+    } 
+~~~
+
