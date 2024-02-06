@@ -3,8 +3,13 @@
 # TypeScript
 
 - [TS - First TS File](#firstts)
-- [TS - Class](#class)
-- [TS - POO](#poo)
+- [TS - POO - Class and Objects](#pooclass)
+- [TS - POO - Encapsulation](#pooencapsulation)
+- [TS - POO - Static Atributes and Methods](#poostatic)
+- [TS - POO - Heritage](#pooheritage)
+- [TS - POO - Polymorphism](#poopolymorphism)
+- [TS - POO - Abstract Class](#pooabstract)
+- [TS - POO - Interfaces](#poointerfaces)
 
 ## What is TypeScript 
 
@@ -115,7 +120,6 @@
     estadoUser = "deslogado"
     estadoUser = false
     //estadoUser = "teste" <--- Error
-
 
     //Enum <-- Colection
     enum Tamanho {
@@ -230,7 +234,7 @@
 
 ~~~
 
-### TS - Class <a id="class"></a>
+### TS - POO - Class and Objects <a id="pooclass"></a>
 ~~~
 
 // index.ts
@@ -271,7 +275,7 @@
     console.log(pessoa2.mostrarNomeUsuario("DBA")); //O Nome do Usuário é Evandro tipo: DBA
 ~~~
 
-### TS - POO <a id="poo"></a>
+### TS - POO - Encapsulation <a id="pooencapsulation"></a>
 ~~~
 // app.ts
 
@@ -402,3 +406,314 @@
     } 
 ~~~
 
+### TS - POO - Static Atributes and Methods <a id="poostatic"></a>
+~~~
+// Calculadora.ts
+
+    export class Calculadora {
+
+        //Class atributes - Static
+        static contadorCalculadora = 0;
+        static PI = 3.14;
+
+        //Class atributes - Private
+        private id: number
+
+        constructor(id: number) {
+            this.id = id
+            Calculadora.contadorCalculadora++
+        }
+
+        static areaCirculo(raio: number): number {
+            let areaCirculo:number = Math.PI * raio * raio
+            return areaCirculo
+        }
+
+        static areaRetangulo(baseRet: number, alturaRet:number):number{
+            let areaRetangulo:number = baseRet * alturaRet
+            return areaRetangulo
+        }
+
+        static areaTrianguloRetangulo(baseTri: number, alturaTri: number):number{
+            let areaTrianguloRetangulo:number = (baseTri * alturaTri)/2
+            return areaTrianguloRetangulo
+        }
+
+        static areaTrianguloEquilatero(lado:number):number{
+            let areaTrianguloEquilatero:number = ((lado ** 2) *  Math.sqrt(3) )/4
+            return areaTrianguloEquilatero
+        }
+    }
+
+        /* Static and private methods are distinct concepts in object-oriented programming. Static methods belong to the class as a whole and can be invoked without creating instances, accessible directly through the class. They are typically used for operations related to the class without relying on specific instance states. On the other hand, private methods, marked with the private keyword, are only accessible within the class, preventing direct external access and manipulation. This enhances encapsulation, protecting the internal implementation of the class, and restricting access to and manipulation of attributes to internal methods. In summary, static methods are shared among all class instances and can be called without creating objects, while private methods are confined to the class's internal scope, ensuring data integrity and security.
+        */
+~~~
+
+### TS - POO - Heritage <a id="pooheritage"></a>
+~~~
+// index.ts
+
+    export class Carro{
+        protected marca: string
+        protected motor: string // Members marked as public are accessible from anywhere, whether within the class itself, in derived classes (inheritance), or from any external code.
+        
+        public isLigado: boolean // Members marked as protected are accessible within the class itself and also in derived classes (inheritance). However, they are not accessible from external code or instances of the class.
+
+        constructor(marca: string, motor: string){
+            this.marca =  marca
+            this.motor = motor
+            this.isLigado = false
+        }
+
+        public ligarMotor(): boolean{
+            if (this.checkupPreStart()){
+                this.isLigado = true
+            }else{
+                this.isLigado = false
+            }
+            return this.isLigado
+        }
+
+        private checkupPreStart():boolean{
+            return true 
+        }
+    }
+
+    export class Suv extends Carro {
+
+        private volumePortaMalas: number
+
+        constructor(volumePortaMalas: number, marca: string, motor: string){
+            super(marca, motor)
+            this.volumePortaMalas = volumePortaMalas
+        }
+
+        //Getters e Setters 
+        public getVolumePortaMalas(): number{
+            return this.volumePortaMalas
+        }
+
+        public getMarca(): string{
+            return this.marca; 
+        }
+
+        public setMarca(marca:string): void{
+            this.marca = marca
+        }
+    }
+
+    var ecoSport = new Suv(23, 'Ford', '2.0')
+
+    console.log(`Carro Ligado: ${ecoSport.ligarMotor()}`); //Carro Ligado: true
+    console.log(`Marca: ${ecoSport.getMarca()}`); //Marca: Ford
+    // console.log(`Marca: ${ecoSport.marca}`); //Error - 'marca' property in the base class is protected, allowing its access in derived classes, such as 'Suv'."
+~~~
+
+### TS - POO - Polymorphism <a id="poopolymorphism"></a>
+~~~
+// index.ts
+
+    export class Carro{
+        protected marca: string
+        protected motor: string
+        public isLigado: boolean
+
+        constructor(marca: string, motor: string){
+            this.marca =  marca
+            this.motor = motor
+            this.isLigado = false
+        }
+
+        // Worker
+        public ligarMotor(): boolean{
+            if (this.checkupPreStart()){
+                this.isLigado = true
+            }else{
+                this.isLigado = false
+            }
+            return this.isLigado
+        }
+
+        private checkupPreStart():boolean{
+            return true 
+        }
+    }
+
+    export class Suv extends Carro {
+
+        private volumePortaMalas: number
+        private modoLuzCarro: "auto" | "cidade" | "alta" | "neblina" 
+        private isLuzLigada: boolean 
+
+        constructor(volumePortaMalas: number, marca: string, motor: string){
+            super(marca, motor)
+            this.volumePortaMalas = volumePortaMalas
+            this.modoLuzCarro = "auto"
+            this.isLuzLigada = false
+        }
+
+        // Getters and Setters 
+        public getVolumePortaMalas(): number{
+            return this.volumePortaMalas
+        }
+        
+        public getMarca(): string{
+            return this.marca; 
+        }
+
+        public setMarca(marca:string): void{
+            this.marca = marca
+        }
+
+        // Worker 
+        public ligarMotor(): boolean{
+            this.ligarLuzes()
+            this.isLigado = true
+            return this.isLigado
+            /*
+            Note that the method Suv.ligarMotor() is different from the method Carro.ligarMotor(), but its signature is the same. This is an example of Method Overriding Polymorphism!
+            */
+        }
+
+        private ligarLuzes(): boolean{
+            if (this.modoLuzCarro === "auto") {
+                this.isLuzLigada = true 
+            }else{
+                this.isLuzLigada = false
+            }
+            return this.isLuzLigada
+        }
+    }
+~~~
+
+
+### TS - POO - Abstract Class <a id="pooabstract"></a>
+~~~
+// index.ts
+
+    // Abstract Class
+    export abstract class Veiculo{
+        constructor(protected marca: string, protected modelo: string){}
+
+        abstract ligarMotor(): boolean
+        abstract desligarMotor(): boolean
+
+        public acinarAssitenteEstacionamento():boolean{
+            return true 
+        }
+    }
+
+    // Regular Class
+    export class Carro extends Veiculo{
+
+        protected motor: string
+        public isLigado: boolean
+
+        constructor(marca: string, motor: string, modelo: string){
+            super(marca, modelo)
+            this.motor = motor
+            this.isLigado = false
+        }
+
+        //Worker
+        public ligarMotor(): boolean{
+            if (this.checkupPreStart()){
+                this.isLigado = true
+            }else{
+                this.isLigado = false
+            }
+            return this.isLigado
+        }
+
+        public desligarMotor(): boolean {
+            throw new Error("Method not implemented.")
+        }
+
+        private checkupPreStart():boolean{
+            return true 
+        }
+
+    }
+
+    export class Suv extends Carro {
+
+        private volumePortaMalas: number
+        private modoLuzCarro: "auto" | "cidade" | "alta" | "neblina" 
+        private isLuzLigada: boolean 
+
+        constructor(volumePortaMalas: number, marca: string, motor: string, modelo:string){
+            super(marca, motor, modelo)
+            this.volumePortaMalas = volumePortaMalas
+            this.modoLuzCarro = "auto"
+            this.isLuzLigada = false
+        }
+
+        public getVolumePortaMalas(): number{
+            return this.volumePortaMalas
+        }
+        
+        public getMarca(): string{
+            return this.marca; 
+        }
+
+        public setMarca(marca:string): void{
+            this.marca = marca
+        }
+
+        //Worker 
+        public ligarMotor(): boolean{
+            this.ligarLuzes()
+            this.isLigado = true
+            return this.isLigado
+        }
+
+        private ligarLuzes(): boolean{
+            if (this.modoLuzCarro === "auto") {
+                this.isLuzLigada = true 
+            }else{
+                this.isLuzLigada = false
+            }
+            return this.isLuzLigada
+        }
+    }
+~~~
+
+### TS - POO - Interfaces <a id="poointerfaces"></a>
+~~~
+// index.ts
+
+    //Interfaces with Classes
+    interface IVeiculo {
+        marca: string;
+        motor: string; 
+        isLigado: boolean; 
+
+        ligarMotor(): void;   
+    }
+
+    class Car implements IVeiculo {
+        marca: string;
+        motor: string;
+        isLigado: boolean;
+    
+        constructor(marca: string, motor: string){
+            this.marca = marca;
+            this.motor = motor; 
+            this.isLigado = false; 
+        } 
+
+        ligarMotor(): void {
+            this.isLigado = true; 
+        }  
+    }
+
+    // Heritage
+    class Suv extends Car {
+        volumePortaMalas: number;
+
+        constructor(vol: number, marca: string, motor: string){
+            super(marca, motor);
+            this.volumePortaMalas = vol; 
+        }
+    }
+~~~
