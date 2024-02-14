@@ -2,6 +2,7 @@
 
 - [React - Introduction](#intro)
 - [React - First Project](#firstproject)
+- [React - Router](#router)
 
 # React - Introduction <a id="intro"></a>
 
@@ -179,6 +180,38 @@ So, for each action, we have an event (clicks, keystrokes, forms, etc.).
 
 The submit event triggers a method, i.e., a function, where we can execute code based on the logic of our application.
 
+## Events with Props 
+
+- You can pass a reference to a method through Props so that it is possible for a child component to activate its ancestor's method;
+- These methods are accessed through an Event;
+- The syntax is the same as a data prop: props.meuEvento.
+
+## Router 
+
+~~~
+>> npm install react-router-dom
+~~~
+
+## React Icons
+
+https://react-icons.github.io/react-icons/
+
+~~~
+>> npm install react-icons --save
+~~~
+
+## Bootstrap with React
+
+1. Install
+~~~
+>> npm install bootstrap
+~~~
+
+2. Import on index.js
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
+
 # React - First Project <a id="firstproject"></a>
 
 ```bash
@@ -191,47 +224,78 @@ npm start
 
 App.js
 ~~~
-import './App.css';
-import Card from './components/Card';
-import ListaCarros from './components/ListaCarros';
-import Pessoa from './components/Pessoa';
-import FormUsuario from "./components/FormUsuario"
-import FormCliente from './components/FormCliente';
-import FormClienteUseState from './components/FormClienteUseState';
+    import './App.css';
+    import Card from './components/001ComponentesBasicosProps/Card';
+    import Pessoa from './components/002PropsCSS/Pessoa';
+    import ListaCarros from './components/003FragmentsPropTypes/ListaCarros';
+    import FormUsuario from './components/004EventosUseState/FormUsuario';
+    import FormCliente from './components/004EventosUseState/FormCliente';
+    import FormClienteUseState from './components/004EventosUseState/FormClienteUseState';
+    import Botao from './components/004EventosUseState/Botao';
+    import RenderCond from './components/005RenderizacaoCondicional/RenderCond';
+    import IfInline from './components/005RenderizacaoCondicional/IfInline';
+    import IfInlineTernario from './components/005RenderizacaoCondicional/IfInlineTernario';
+    import RenderNull from './components/005RenderizacaoCondicional/RenderNull';
+    import RenderListas from './components/006RenderizacaoListas/RenderListas';
+    import RenderListas2 from './components/006RenderizacaoListas/RenderListas2';
+    import RenderListas3 from './components/006RenderizacaoListas/RenderListas3';
+    import ComponentePai from './components/007ElevandoState/ComponentePai';
+    import Icons from './components/008Icons/Icons';
 
-function App() {
 
-  function soma(a, b){
-    return a + b
-  }
+    function App() {
 
-  const nome = "Ivan"
+    function soma(a, b){
+        return a + b
+    }
 
-  return (
-    <div className="App">
-        <p>Olá {nome}, Este é seu primeiro REACT!</p>
-        <p>A soma de A e B é: {soma(2, 5)}</p>
-        <p>Teste</p>
-        <Card/>
-        <Pessoa nome="Joselito" 
-                idade="34"
-                cpf="004.005.009-23" 
-                foto="https://github.com/Ivan-J-Borchardt/imagens/blob/master/joinha.jpg?raw=true"       
-        />
-        <Pessoa nome="Joana" 
-                idade="23"
-                cpf="004.005.222.98" 
-                foto="https://github.com/Ivan-J-Borchardt/imagens/blob/master/toquinho.jpg?raw=true"       
-        />
-        <ListaCarros/>
-        <FormUsuario/>
-        <FormCliente/>
-        <FormClienteUseState/>
-    </div>
-  );
-}
+    function deletarUsuario(){
+        console.log("Usuario deletado com sucesso!!!");
+    }
 
-export default App;
+    const nome = "Ivan"
+    return (
+        <div className="App">
+            <p className="vermelho">Olá {nome}, Este é seu primeiro REACT!</p>
+            <p>A soma de A e B é: {soma(2, 5)}</p>
+            <p>Teste</p>
+            <FormClienteUseState/>
+            <FormCliente/>
+
+            <FormUsuario/>
+            <Botao event={deletarUsuario} text="Deletar"/>
+            <Card/>
+            <Pessoa nome="Joselito" 
+                    idade="34"
+                    cpf="004.005.009-23" 
+                    foto="https://github.com/Ivan-J-Borchardt/imagens/blob/master/joinha.jpg?raw=true"       
+            />
+            <Pessoa nome="Joana" 
+                    idade="23"
+                    cpf="004.005.222.98" 
+                    foto="https://github.com/Ivan-J-Borchardt/imagens/blob/master/toquinho.jpg?raw=true"       
+            />
+
+            <ListaCarros/>
+
+            <RenderCond isLogado={true} nome={"João"}/>
+            <IfInline isLogado={false} nome={"João"}/>
+            <IfInlineTernario isLogado={true} nome={"João"}/>
+            <RenderNull err={false} msn={"Deu Erro!!!"}/>
+
+            <RenderListas/>
+            <RenderListas2/>
+            <RenderListas3/>
+
+            <ComponentePai/>
+
+            <Icons/>
+
+        </div>
+    );
+    }
+
+    export default App;
 ~~~
 
 Folder components -> Card.js
@@ -348,11 +412,11 @@ function FormUsuario() {
         console.log("Salvando...:", document.getElementById("idNome").value);
     }
 
-    return(
+    return (
         <>
-            <div>
-                <label htmlFor="idNome">Nome:</label>
-                <input type="text" id="idNome"/>
+            <div className="mb-3">
+                <label htmlFor="idNome" className="form-label">Nome:</label>
+                <input type="text" id="idNome" className="form-control" />
             </div>
             <button onClick={salvar} >Salvar</button>
         </>
@@ -438,4 +502,440 @@ function Botao(props) {
 }
 
 export default Botao
+~~~
+
+Folder components --> RenderCond.js
+~~~
+    import Login from "./Login"
+
+    function RenderCond(props) {
+
+        const isLogado = props.isLogado
+
+        if (isLogado) {
+            return (
+                <div>
+                    <h2>Renderização Condicional 1</h2>
+                    <h2>Bem vindo {props.nome}</h2>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <h2>Exemplo 1 Renderização Condicional</h2>
+                    <Login />
+                </div>
+            )
+        }
+    }
+
+    export default RenderCond
+    ~~~
+
+Folder components ---> Login.js
+~~~
+    import {useState} from "react"
+    import Botao from "../004EventosUseState/Botao"
+
+    function Login(params) {
+
+        function logar() {
+            console.log(`Loggin ${userName} - ${password}`);
+        }
+
+        const [userName, setUserName] = useState()
+        const [password, setPassword] = useState()
+
+
+        return(
+            <form>
+                <label htmlFor="idUser">User</label><br/>
+                <input type="Text" 
+                    id="idUser"
+                    onChange={event=>setUserName(event.target.value)}
+                />
+                <br/><br/>
+                <label htmlFor="idPass">Senha</label><br/>
+                <input type="password" 
+                    id="idPass"
+                    onChange={event=>setPassword(event.target.value)}
+                />
+                <br/><br/>
+                <Botao event={logar} text="Login"/>
+
+            </form>
+        )
+    }
+
+    export default Login
+~~~
+
+Folder components --> IfInline.js
+~~~
+    import Login from "./Login"
+
+    function IfInline(props) {
+
+        const isLogado = props.isLogado
+
+        return (
+            <div>
+                <h2>Exemplo 2 Renderização Condicional</h2>
+                {isLogado && (
+                    <div>
+                        <h2>Bem vindo {props.nome}</h2>
+                    </div>)
+                }
+                {!isLogado && (
+                    <div>
+                        <Login />
+                    </div>)
+                }
+            </div>
+
+        )
+    }
+
+    export default IfInline
+~~~
+
+Folder components --> IfInlineTernario.js
+~~~
+    import Login from "./Login"
+
+    function IfInlineTernario(props) {
+
+        const isLogado = props.isLogado
+
+        return (
+            <div>
+                <h2>Exemplo 3 Renderização Condicional</h2>
+                {isLogado ? (
+                    <div>
+                        <h2>Bem vindo {props.nome}</h2>
+                    </div>
+                ):(
+                    <div>
+                        <Login />
+                    </div>
+                )}
+            </div>
+
+        )
+    }
+
+    export default IfInlineTernario
+~~~
+
+Folder components --> RenderNull.js
+~~~
+    function RenderNull(props) {
+
+        if (!props.err) {
+            return null
+        }
+
+        return(
+            <div>
+                <p>Erro: {props.msn} </p>
+            </div>
+        )
+    }
+
+    export default RenderNull
+~~~
+
+Folder components --> RenderListas.js
+~~~
+    function RenderListas() {
+
+        const navegadores = ['IE', 'Chrome', 'Firefox', 'Opera', 'Edge', 'Safari']
+
+        return(
+            <div>
+                <h2>Exemplo Render Lista 1 - UL</h2>
+                <ul>
+                    {navegadores.map((navegador, index)=>{return(
+                        <li key={index}>{navegador}</li>
+                    )})}
+                </ul>
+            </div>
+        )
+    }
+
+    export default RenderListas
+~~~
+
+Folder components --> RenderListas2.js
+~~~
+    import { useState } from "react"
+    import Botao from "../004EventosUseState/Botao"
+
+    function RenderListas2(params) {
+
+        const navegadores = ['IE', 'Chrome', 'Firefox', 'Opera', 'Netscape']
+        //const navegadores = []
+
+        const [navegador, setNavegador] = useState(navegadores[0])
+
+        function imprimirNavegador() {
+            console.log(`Navegador: ${navegador}`);
+        }
+
+        return(
+            <div>
+                <h1>Renderização Lista - Select</h1>
+                <select name="nmSelect" id="idSelect" onChange={(event) => setNavegador(event.target.value)}>
+                    {navegadores.map((navegador,index)=> {return(
+                        <option key={index}>{navegador}</option>
+                    )})}
+                </select>
+                <Botao event={imprimirNavegador} text="Capturar"/>
+            </div>
+        )
+    }
+
+    export default RenderListas2
+~~~
+
+Folder components --> RenderListas3.js
+~~~
+    import { useState } from "react"
+    import Botao from "../004EventosUseState/Botao"
+
+    function RenderListas3(params) {
+
+        //const navegadores = ['IE', 'Chrome', 'Firefox', 'Opera', 'Netscape']
+        const navegadores = []
+
+        const [navegador, setNavegador] = useState(navegadores[0])
+
+        function imprimirNavegador() {
+            console.log(`Navegador: ${navegador}`);
+        }
+
+
+        return (
+            <div>
+                <h1>Renderização Lista - Select</h1>
+                <select name="nmSelect" id="idSelect" onChange={(event) => setNavegador(event.target.value)}>
+                    {navegadores.length > 0 ? (
+                        navegadores.map((navegador, index) => {
+                            return (
+                                <option key={index}>{navegador}</option>
+                            )
+                        })
+                    ) : (
+                        <option key={0}>Falha ao Carregar Navegadores</option>
+                    )}
+
+
+                </select>
+                <Botao event={imprimirNavegador} text="Capturar" />
+            </div>
+        )
+
+    }
+
+    export default RenderListas3
+~~~
+
+Folder components --> ComponentePai.js
+~~~
+    import {useState} from "react" 
+    import ComponenteFilho1 from "./ComponenteFilho1"
+    import ComponenteFilho2 from "./ComponenteFilho2"
+
+    function ComponentePai(params) {
+
+        const [nome, setNome] = useState()
+        return(
+            <>
+                <h1>Elevando o State</h1>
+                <ComponenteFilho1 setNome={setNome} nome={nome} />
+                <ComponenteFilho2 nome={nome}/>
+                <p>{nome}</p>
+            </>
+        )
+    }
+
+    export default ComponentePai
+~~~
+
+Folder components --> ComponenteFilho1.js
+~~~
+ function ComponenteFilho1({setNome, nome}) {
+
+    return(
+        <div>
+            <label htmlFor="idNomeP">Nome:</label>
+            <input type="text"
+                   id="idNomeP"
+                   value={nome}
+                   onChange={event=>setNome(event.target.value)}
+            />
+        </div>
+    )
+}
+
+export default ComponenteFilho1
+~~~
+
+Folder components --> ComponenteFilho2.js
+~~~
+    function ComponenteFilho2(props) {
+        return <p>Olá {props.nome}, tudo bem com vc? </p>
+    }
+
+    export default ComponenteFilho2
+~~~
+
+Folder components --> Icons.js
+~~~
+    import { BsAirplaneEnginesFill } from "react-icons/bs";
+    import { DiApple } from "react-icons/di";
+    import styles from "./Icons.module.css"
+
+    function Icons() {
+        return (
+
+            <ul className={styles.socialMedia}>
+                <li><BsAirplaneEnginesFill /></li>
+                <li><DiApple /></li>
+            </ul>
+        )
+    }
+
+    export default Icons
+~~~
+
+Folder components --> Icons.module.css
+~~~
+    .socialMedia {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+    }
+
+    .socialMedia li{
+        margin: 0 1em;
+    }
+
+    .socialMedia svg{
+        font-size: 2em;
+        color:blue;
+        cursor: pointer;
+    }
+~~~
+
+# React - Router <a id="router"></a>
+
+App.js
+~~~
+    import {BrowserRouter as Router, Routes, Route, Link, Navigate} from 'react-router-dom'
+    import './App.css';
+    import Home from './pages/Home';
+    import Empresa from './pages/Empresa';
+    import Contato from './pages/Contato';
+    import Info from './pages/Info';
+    import Navebar from './components/Navebar';
+
+    function App() {
+    return (
+        <Router>
+        <Navebar/>
+        <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/empresa' element={<Empresa/>}/>
+            <Route path='/contato' element={<Contato/>}/>
+            <Route path='/info' element={<Navigate to="/"/>}/>
+        </Routes>
+        </Router>
+    );
+    }
+
+    export default App;
+~~~
+
+Pages/Contato.js
+~~~
+    import { useNavigate } from "react-router-dom";
+
+    function Contato() {
+
+        const navigate = useNavigate()
+        function voltarHome(){
+            navigate("/")
+        }
+
+        return(
+            <div>
+                <h1>Contato</h1>
+                <p>Formulário de Contato</p>
+                <button onClick={voltarHome}>Home</button>
+            </div>
+        )
+    }
+
+    export default Contato
+~~~
+
+Pages/Empresa.js
+~~~
+    import { Link } from "react-router-dom"
+    function Empresa() {
+        return(
+            <div>
+                <h1>Empresa</h1>
+                <p>Encontre aqui todas as informações <Link to="/info">sobre</Link> nossa empresa</p>
+            </div>
+        )
+    }
+
+    export default Empresa
+~~~
+
+Pages/Home.js
+~~~
+    function Home() {
+        return(
+            <div>
+                <h1>Home</h1>
+                <p>Página Principal</p>
+            </div>
+        )
+    }
+
+    export default Home
+~~~
+
+Pages/Info.js
+~~~
+    function Info() {
+        return(
+            <div>
+                <h1>Infos</h1>
+                <p>Conteúdo da Página</p>
+            </div>
+        )
+    }
+
+    export default Info
+~~~
+
+Components/Navebar.js
+~~~
+    import { Link } from "react-router-dom"
+    function Navebar() {
+        return (
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/empresa">Empresa</Link></li>
+                <li><Link to="/contato">Contato</Link></li>
+            </ul>
+        )
+    }
+
+    export default Navebar
 ~~~
