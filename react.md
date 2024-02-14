@@ -530,7 +530,7 @@ Folder components --> RenderCond.js
     }
 
     export default RenderCond
-    ~~~
+~~~
 
 Folder components ---> Login.js
 ~~~
